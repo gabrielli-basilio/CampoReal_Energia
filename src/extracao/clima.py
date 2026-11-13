@@ -74,7 +74,7 @@ def horas_esperadas(inicio, fim):
 # ---------- banco ----------
 
 def carregar_usinas(conn, cfg, logger):
-    """Usa staging.usina (limpa pelo Biel). Se nao existir ainda, le a origem e aplica o ajuste minimo."""
+    """Usa staging.usina. Se nao existir ainda, le a origem e aplica o ajuste minimo."""
     with conn.cursor() as cur:
         cur.execute("SELECT to_regclass('staging.usina')")
         existe = cur.fetchone()[0] is not None

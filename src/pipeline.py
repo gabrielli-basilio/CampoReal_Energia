@@ -28,14 +28,14 @@ def main():
     if existe("src.qualidade.executar"):
         rodar("2. Limpeza (qualidade)", "src.qualidade.executar", ["--etapas", "limpeza"])
     else:
-        print("\n=== 2. Limpeza: src/qualidade ainda nao existe (parte do Biel). Pulando. ===")
+        print("\n=== 2. Limpeza: src/qualidade ainda nao existe. Pulando. ===")
 
     rodar("3. Clima do Open-Meteo", "src.extracao.clima")
 
     if existe("src.carga_dw"):
         rodar("4. Carga do DW", "src.carga_dw")
     else:
-        print("\n=== 4. Carga do DW: src/carga_dw.py ainda nao existe (parte do Joao). Pulando. ===")
+        print("\n=== 4. Carga do DW: src/carga_dw.py ainda nao existe. Pulando. ===")
 
     print("\nPipeline terminado.")
 

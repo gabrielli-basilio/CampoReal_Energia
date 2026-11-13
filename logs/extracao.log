@@ -97,3 +97,19 @@
 2026-11-13 00:25:16,002 [INFO] 2025: ja completo, nada a baixar
 2026-11-13 00:25:16,627 [INFO] 2026: API tem 30432 registros, raw ja tem 30432
 2026-11-13 00:25:16,627 [INFO] 2026: ja completo, nada a baixar
+2026-11-13 00:33:39,504 [INFO] 2025: API tem 35040 registros, raw ja tem 35040
+2026-11-13 00:33:39,504 [INFO] 2025: ja completo, nada a baixar
+2026-11-13 00:33:39,998 [INFO] 2026: API tem 30432 registros, raw ja tem 30432
+2026-11-13 00:33:39,998 [INFO] 2026: ja completo, nada a baixar
+2026-11-13 00:33:40,582 [WARNING] staging.usina indisponivel: lendo a origem com ajuste minimo de cadastro
+2026-11-13 00:33:40,582 [WARNING] Usina CRE-EOL-07 ignorada (codigo fora do padrao ou fora do Brasil)
+2026-11-13 00:33:40,582 [INFO] 9 usinas para baixar o clima
+2026-11-13 00:33:40,734 [INFO] CRE-BIO-005: clima ja completo (16320 horas)
+2026-11-13 00:33:40,903 [INFO] CRE-EOL-003: clima ja completo (16320 horas)
+2026-11-13 00:33:41,063 [INFO] CRE-EOL-007: clima ja completo (16320 horas)
+2026-11-13 00:33:41,213 [INFO] CRE-PCH-002: clima ja completo (16320 horas)
+2026-11-13 00:33:41,380 [INFO] CRE-UFV-004: clima ja completo (16320 horas)
+2026-11-13 00:33:41,547 [INFO] CRE-UFV-006: clima ja completo (16320 horas)
+2026-11-13 00:33:41,697 [INFO] CRE-UHE-001: clima ja completo (16320 horas)
+2026-11-13 00:33:41,872 [INFO] CRE-UHE-008: clima ja completo (16320 horas)
+2026-11-13 00:33:42,020 [INFO] CRE-UTE-009: clima ja completo (16320 horas)
