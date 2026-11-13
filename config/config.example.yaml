@@ -13,13 +13,13 @@ ccee:
 # Valores oficiais homologados pela ANEEL (em R$/MWh)
 # Dataset "pld_horario" utiliza o teto horario (PLDmax_horario)
 limites_pld:
-  2025: { piso: null, teto: null }
-  2026: { piso: null, teto: null }
+  2025: { piso: 58.60, teto: 1542.23 }
+  2026: { piso: 57.31, teto: 1611.04 }
 
 open_meteo:
   url: "https://archive-api.open-meteo.com/v1/archive"
   data_inicio: "2025-01-01"
-  data_fim: "2025-12-31"
+  data_fim: "2026-10-31"
   fuso: "America/Sao_Paulo"
   timeout: 60
   tentativas: 3
