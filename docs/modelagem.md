@@ -12,6 +12,10 @@ Banco: PostgreSQL. Schema do warehouse: `dw_campo_real`. DDL em `sql/03_dw/01_dd
 | `qualidade` | Profiling, métricas por regra, tratamentos, quarentena e impacto antes × depois. |
 | `dw_campo_real` | Star schema lido pelo painel. |
 
+## Período dos dados
+
+A dimensão de tempo cobre 2025 e 2026. PLD e clima vão até o último mês carregado de 2026. Geração e paradas existem só em 2025, porque a origem só tem esse ano; por isso receita, preço capturado e perdas são sempre de 2025, e o painel filtra `ano = 2025` nessas análises.
+
 ## 2. Matriz de barramento
 
 | Processo de negócio | Tempo | Usina | Fonte | Submercado | Tipo de parada | Status de qualidade | Regra de qualidade |
@@ -30,18 +34,20 @@ Banco: PostgreSQL. Schema do warehouse: `dw_campo_real`. DDL em `sql/03_dw/01_dd
 |---|---|---|
 | `fato_geracao` | 1 usina × 1 hora de 2025, para as horas que têm medição depois da limpeza | energia_mwh, disponibilidade_mw, potencia_mw, pld_rs_mwh, receita_pld_rs |
 | `fato_pld` | 1 submercado × 1 hora (2025 e 2026 até o último mês publicado) | pld_rs_mwh |
-| `fato_clima` | 1 usina × 1 hora de 2025 (ponto Open-Meteo na coordenada da usina) | radiacao_wm2, vento_100m_kmh, temperatura_c, precipitacao_mm |
+| `fato_clima` | 1 usina × 1 hora de 2025 e 2026 até `open_meteo.data_fim` (ponto Open-Meteo na coordenada da usina) | radiacao_wm2, vento_100m_kmh, temperatura_c, precipitacao_mm |
 | `fato_parada_hora` | 1 parada × 1 hora indisponível | horas_indisponiveis, energia_nao_gerada_mwh, receita_nao_gerada_rs |
 | `fato_qualidade` | 1 regra × 1 execução (fase ANTES ou DEPOIS da limpeza) | registros_avaliados, registros_falha, percentual_falha, indice_qualidade |
 | `fato_impacto_limpeza` | 1 indicador × 1 recorte (fonte ou total) | valor_antes, valor_depois, diferenca, variacao_pct |
 
 Medidas derivadas e por que estão no fato:
 
-- `receita_pld_rs = energia_mwh × PLD da mesma hora no submercado da usina`. É aditiva e responde à pergunta 2 sem obrigar o Power BI a relacionar duas tabelas por chave composta (hora + submercado). `pld_rs_mwh` fica ao lado como contexto da linha.
+- `receita_pld_rs = energia_mwh × PLD da mesma hora no submercado da usina`. É aditiva e responde à pergunta 2 sem obrigar o Tableau a relacionar duas tabelas por chave composta (hora + submercado). `pld_rs_mwh` fica ao lado como contexto da linha.
 - `potencia_mw` repetida em cada hora permite somar a energia possível no período e calcular o fator de capacidade com a potência vigente naquela versão da usina.
 - `energia_nao_gerada_mwh` em `fato_parada_hora` é a média gerada pela própria usina no mesmo mês e na mesma hora do dia, fora de paradas e sem valores anulados. É uma estimativa e está documentada como tal no painel.
 
 ## 4. Diagrama do star schema
+
+Imagem: `docs/diagrama_star_schema.png`. Matriz de barramento em imagem: `docs/matriz_barramento.png`.
 
 ```mermaid
 erDiagram
@@ -183,7 +189,7 @@ Isso foi testado alterando a potência de uma usina na staging: nasce a versão 
 |---|---|---|
 | Medição | usina × hora | Grão base de `fato_geracao`. |
 | PLD | submercado × hora | `fato_pld` próprio, ligado pela mesma `dim_tempo` e por `dim_submercado`. A receita é calculada na carga ligando a hora da medição com o PLD da mesma hora no submercado da usina. |
-| Clima (Open-Meteo) | ponto (lat, lon) × hora | Uma requisição por usina, na coordenada **tratada** da usina, por isso a associação é 1 ponto = 1 usina. Para chegar ao submercado, agrega-se pela `sk_submercado` gravada no fato. Se a fonte fosse uma estação do INMET, a associação seria pela estação mais próxima (distância haversine), e a distância ficaria registrada. |
+| Clima (Open-Meteo, 2025 e 2026) | ponto (lat, lon) × hora | Uma requisição por usina, na coordenada **tratada** da usina, por isso a associação é 1 ponto = 1 usina. Para chegar ao submercado, agrega-se pela `sk_submercado` gravada no fato. Se a fonte fosse uma estação do INMET, a associação seria pela estação mais próxima (distância haversine), e a distância ficaria registrada. |
 | Paradas | intervalo (início, fim) | Explodido em horas (`generate_series`) para cruzar com geração e PLD no mesmo grão. |
 | Cadastro | estado atual | Dimensão SCD 2. |
 | Feriados | dia | Atributo da `dim_tempo` (todas as horas do dia herdam). |
@@ -201,7 +207,7 @@ flowchart LR
     S --> Q[qualidade.*]
     S --> DW[(dw_campo_real)]
     Q --> DW
-    DW --> P[Power BI]
+    DW --> P[Tableau]
 ```
 
 ## 10. Contrato com as outras etapas

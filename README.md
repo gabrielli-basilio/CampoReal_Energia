@@ -91,7 +91,7 @@ python -m src.extracao.ccee --simular-falha
 
 ## 7. Data Warehouse (star schema)
 
-A carga cria e preenche o schema `dw_campo_real`, que é o único lido pelo Power BI.
+A carga cria e preenche o schema `dw_campo_real`, que é o único lido pelo painel no Tableau. A dimensão de tempo cobre 2025 e 2026; geração e paradas existem só em 2025.
 
 ```bash
 python -m src.carga_dw
