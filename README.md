@@ -54,9 +54,9 @@ Os arquivos `.env` e `config/config.yaml` estão listados no `.gitignore` e não
 | :---: | :--- | :--- | :--- |
 | **1** | **Carga de Origem** | Executar `sql/00_origem/campo_real_energia_postgres.sql` no DBeaver ou pgAdmin | 10 usinas e 78.798 medições carregadas no schema de origem |
 | **2** | **Extração CCEE** | `python -m src.extracao.ccee` | Carga do PLD horário de 2025 e 2026 nas camadas `raw` e `staging` |
-| **3** | **Pipeline Completo** | `python -m src.pipeline` | Executa CCEE, limpeza (quando disponível), clima e carga do DW |
+| **3** | **Pipeline Completo** | `python -m src.pipeline` | Executa CCEE, limpeza (`src.qualidade.executar --etapas limpeza`), clima e carga do DW |
 | **4** | **Testes Unitários** | `python -m pytest -q` | Todos os testes de regras, paginação e falhas aprovados (`6 passed`) |
-| **5** | **Verificação de Qualidade** | Executar as consultas da seção 5.1 no DBeaver ou pgAdmin | Contagens de PLD e clima conferem com o esperado para 2025-01-01 a 2026-10-31 |
+| **5** | **Avaliação de Qualidade** | `python -m src.qualidade.executar` | Ciclo completo: avalia a origem (com profiling), limpa, reavalia a staging e gera o impacto. As regras de clima só são avaliadas se rodar **depois** do passo 3 |
 
 ---
 
@@ -70,9 +70,22 @@ Os arquivos `.env` e `config/config.yaml` estão listados no `.gitignore` e não
 | **Staging** | `staging.pld_horario`, `staging.clima_horario` | Dados tipados, deduplicados e padronizados para alimentar o Data Warehouse. |
 | **Auditoria** | `raw.log_extracao` | Registra início, fim, linhas lidas, linhas gravadas, status e mensagens de erro de cada execução. |
 
-### 5.1 Verificação de Qualidade (após a extração)
+### 5.1 Avaliação de Qualidade (após a extração)
 
-Confere se a carga cobre todo o período, sem buracos por mês:
+Módulo `src/qualidade`, com profiling, regras, limpeza e relatório de impacto:
+
+```bash
+python -m src.qualidade.executar                   # ciclo completo (padrão)
+python -m src.qualidade.executar --etapas antes    # só avalia a origem (e faz o profiling)
+python -m src.qualidade.executar --etapas limpeza  # limpa origem -> staging (é o que o pipeline chama)
+python -m src.qualidade.executar --etapas depois   # só reavalia a staging
+```
+
+Ciclo completo: avalia **antes** (+ profiling) → limpa (origem → staging) → avalia **depois** → impacto.
+
+> O clima só existe depois do pipeline. Na primeira passada as regras de clima aparecem com 0 avaliados; rode `python -m src.qualidade.executar` de novo depois de `python -m src.pipeline`.
+
+Conferência complementar da cobertura do período:
 
 ```sql
 -- PLD horário: linhas por mês
