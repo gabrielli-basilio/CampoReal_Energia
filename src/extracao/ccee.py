@@ -1,9 +1,18 @@
-"""Extracao do PLD horario da CCEE (via API CKAN ou arquivos CSV locais na pasta dados/)."""
-import csv
+"""Extracao do PLD horario da CCEE (API CKAN do portal de dados abertos).
+
+Fluxo de cada ano:
+  1. descobre o resource_id (ou usa o do config.yaml)
+  2. pergunta o total de registros da API
+  3. se o raw ja tem tudo -> "JA_COMPLETO" (carga incremental, nao baixa de novo)
+  4. senao baixa a partir de onde parou (limit/offset), guarda no raw como chegou
+  5. converte o raw para staging.pld_horario (tipos corretos, 1 linha por submercado x hora)
+
+Uso:  python -m src.extracao.ccee
+      python -m src.extracao.ccee --simular-falha   (gera uma execucao com ERRO no log)
+"""
 import re
 import sys
 from datetime import datetime, timedelta
-from pathlib import Path
 
 from psycopg2.extras import Json, execute_values
 
@@ -28,10 +37,11 @@ COLUNAS = {
 }
 
 
-# ---------- funcoes puras ----------
+# ---------- funcoes puras (testaveis sem internet) ----------
 
 def achar_coluna(registro, apelidos):
-    mapa = {str(k).upper().strip("\ufeff"): v for k, v in registro.items()}
+    """Devolve o valor da primeira coluna encontrada (ignora maiuscula/minuscula)."""
+    mapa = {str(k).upper(): v for k, v in registro.items()}
     for nome in apelidos:
         if nome in mapa:
             return mapa[nome]
@@ -39,6 +49,7 @@ def achar_coluna(registro, apelidos):
 
 
 def converter_registro(registro):
+    """Registro bruto da API -> (cod_submercado, data_hora, pld)."""
     sub_bruto = str(achar_coluna(registro, COLUNAS["submercado"])).strip().upper()
     if sub_bruto not in SUBMERCADOS:
         raise ErroExtracao(f"Submercado desconhecido: {sub_bruto!r}")
@@ -51,8 +62,6 @@ def converter_registro(registro):
 
     if re.match(r"^\d{4}-\d{2}-\d{2}", dia):
         base = datetime.strptime(dia[:10], "%Y-%m-%d")
-    elif re.match(r"^\d{2}/\d{2}/\d{4}", dia):
-        base = datetime.strptime(dia[:10], "%d/%m/%Y")
     else:
         mes = str(achar_coluna(registro, COLUNAS["mes"])).strip()
         base = datetime(int(mes[:4]), int(mes[4:6]), int(float(dia)))
@@ -64,6 +73,7 @@ def converter_registro(registro):
 
 
 def paginar(buscar_pagina, limite, offset_inicial=0):
+    """Gera paginas ate o total informado pela API ou ate uma pagina vazia."""
     offset = offset_inicial
     while True:
         registros, total = buscar_pagina(offset, limite)
@@ -75,27 +85,10 @@ def paginar(buscar_pagina, limite, offset_inicial=0):
             return
 
 
-# ---------- leitura de CSV local ----------
-
-def ler_csv_local(caminho_csv, tamanho_lote=5000):
-    """Lê o CSV baixado do portal da CCEE detectando delimitador (; ou ,) e encoding."""
-    for enc in ("utf-8-sig", "latin-1"):
-        try:
-            with open(caminho_csv, mode="r", encoding=enc) as f:
-                amostra = f.read(4096)
-                f.seek(0)
-                delimitador = ";" if amostra.count(";") > amostra.count(",") else ","
-                leitor = csv.DictReader(f, delimiter=delimitador)
-                registros = list(leitor)
-                return registros
-        except UnicodeDecodeError:
-            continue
-    raise ErroExtracao(f"Nao foi possivel decodificar o arquivo {caminho_csv}")
-
-
 # ---------- acesso a API ----------
 
 def descobrir_recursos(cfg, logger):
+    """Acha o resource_id de cada ano pelo nome do recurso no dataset."""
     c = cfg["ccee"]
     dados = pegar_json(c["url_pacote"], {"id": c["dataset"]}, c["timeout"],
                        c["tentativas"], c["espera_segundos"], logger)
@@ -144,6 +137,7 @@ def gravar_raw(conn, resource_id, ano, offset, registros):
 
 
 def raw_para_staging(conn, resource_id):
+    """Converte todo o raw do recurso para staging.pld_horario. Devolve linhas gravadas."""
     with conn.cursor() as cur:
         cur.execute("SELECT registro FROM raw.pld_horario WHERE resource_id = %s ORDER BY posicao",
                     (resource_id,))
@@ -175,34 +169,8 @@ def linhas_no_raw(conn, resource_id):
 
 # ---------- execucao ----------
 
-def extrair_ano(conn, cfg, ano, resource_id, logger, simular_falha=False):
-    arquivo_local = Path("dados") / f"pld_horario_{ano}.csv"
-
+def extrair_ano(conn, cfg, ano, resource_id, logger):
     with Execucao("CCEE", f"PLD_HORARIO_{ano}") as ex:
-        if arquivo_local.exists() and not simular_falha:
-            logger.info("%s: lendo arquivo local %s", ano, arquivo_local)
-            todos = ler_csv_local(arquivo_local)
-            total = len(todos)
-            ja_tem = linhas_no_raw(conn, resource_id)
-            logger.info("%s: CSV tem %s registros, raw ja tem %s", ano, total, ja_tem)
-
-            if ja_tem >= total:
-                ex.status = "JA_COMPLETO"
-                logger.info("%s: ja completo, nada a gravar", ano)
-                return
-
-            limite = cfg["ccee"]["limite_por_pagina"]
-            for offset in range(ja_tem, total, limite):
-                lote = todos[offset : offset + limite]
-                gravar_raw(conn, resource_id, ano, offset, lote)
-                ex.lidas += len(lote)
-                ex.gravadas += len(lote)
-                logger.info("%s: gravados %s de %s", ano, offset + len(lote), total)
-
-            n = raw_para_staging(conn, resource_id)
-            logger.info("%s: staging.pld_horario atualizado (%s linhas no ano)", ano, n)
-            return
-
         total = total_da_api(cfg, resource_id, logger)
         if total == 0:
             raise ErroExtracao(f"Resposta vazia: a API nao retornou registros para {ano}")
@@ -258,7 +226,7 @@ def main(simular_falha=False):
                         f"Recurso nao encontrado para {ano}. Coloque o id em resource_ids no config.yaml"
                     )
                 ids[ano] = descobertos[ano]
-            extrair_ano(conn, cfg, ano, ids[ano], logger, simular_falha=simular_falha)
+            extrair_ano(conn, cfg, ano, ids[ano], logger)
         except Exception as e:
             conn.rollback()
             erros += 1

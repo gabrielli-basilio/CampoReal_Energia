@@ -1,67 +1,41 @@
-"""Utilitarios de requisicao HTTP com retentativas sem dependencias externas."""
+"""Utilitarios de requisicao HTTP com retentativas e emulacao de navegador."""
 
-import json
-import subprocess
 import time
-from urllib.parse import urlencode, urlparse
+from urllib.parse import urlparse
+
+from curl_cffi import requests
 
 
 class ErroExtracao(Exception):
     """Erro levantado quando a extracao falha apos todas as tentativas ou recebe dados invalidos."""
 
 
-USER_AGENT = (
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-    "AppleWebKit/537.36 (KHTML, like Gecko) "
-    "Chrome/131.0.0.0 Safari/537.36"
-)
-
-
-def _montar_url(url, params):
-    if not params:
-        return url
-    separador = "&" if "?" in url else "?"
-    return f"{url}{separador}{urlencode(params)}"
+HEADERS = {
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+}
 
 
 def pegar_json(url, params=None, timeout=60, tentativas=3, espera_segundos=2, logger=None):
-    """Faz uma requisicao GET esperando JSON via curl nativo do Windows."""
-    url_completa = _montar_url(url, params)
+    """Faz uma requisicao GET esperando JSON, emulando navegador para evitar bloqueio WAF."""
     parsed = urlparse(url)
-    referer = f"{parsed.scheme}://{parsed.netloc}/"
+    headers_req = {
+        **HEADERS,
+        "Referer": f"{parsed.scheme}://{parsed.netloc}/",
+    }
     ultimo_erro = None
-
-    comando = [
-        "curl.exe",
-        "-sS",
-        "-L",
-        "-f",
-        "--max-time",
-        str(timeout),
-        "-H",
-        f"User-Agent: {USER_AGENT}",
-        "-H",
-        "Accept: application/json, text/plain, */*",
-        "-H",
-        "Accept-Language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-        "-H",
-        f"Referer: {referer}",
-        url_completa,
-    ]
 
     for tentativa in range(1, tentativas + 1):
         try:
-            proc = subprocess.run(
-                comando,
-                capture_output=True,
-                text=True,
-                encoding="utf-8",
-                check=False,
+            resp = requests.get(
+                url,
+                params=params,
+                headers=headers_req,
+                timeout=timeout,
+                impersonate="chrome",
             )
-            if proc.returncode != 0:
-                detalhe = proc.stderr.strip() or f"codigo de saida {proc.returncode}"
-                raise RuntimeError(f"Erro HTTP/rede no curl: {detalhe}")
-            return json.loads(proc.stdout)
+            resp.raise_for_status()
+            return resp.json()
         except Exception as e:
             ultimo_erro = e
             if logger:
