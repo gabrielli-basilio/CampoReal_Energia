@@ -59,19 +59,34 @@
           <relation connection='postgres.05ok52a1erbmrr15gcw4u0rl1tf3' name='fato_clima2' table='[dw_campo_real].[fato_clima]' type='table' />
           <relation connection='postgres.05ok52a1erbmrr15gcw4u0rl1tf3' name='fato_geracao2' table='[dw_campo_real].[fato_geracao]' type='table' />
           <relation connection='postgres.05ok52a1erbmrr15gcw4u0rl1tf3' name='fato_parada_hora1' table='[dw_campo_real].[fato_parada_hora]' type='table' />
+          <relation connection='postgres.05ok52a1erbmrr15gcw4u0rl1tf3' name='fato_impacto_limpeza' table='[dw_campo_real].[fato_impacto_limpeza]' type='table' />
+          <relation connection='postgres.05ok52a1erbmrr15gcw4u0rl1tf3' name='impacto_limpeza' table='[qualidade].[impacto_limpeza]' type='table' />
+          <relation connection='postgres.05ok52a1erbmrr15gcw4u0rl1tf3' name='vw_captura_por_fonte' table='[dw_campo_real].[vw_captura_por_fonte]' type='table' />
+          <relation connection='postgres.05ok52a1erbmrr15gcw4u0rl1tf3' name='vw_correlacao_clima' table='[dw_campo_real].[vw_correlacao_clima]' type='table' />
+          <relation connection='postgres.05ok52a1erbmrr15gcw4u0rl1tf3' name='vw_geracao_mensal' table='[dw_campo_real].[vw_geracao_mensal]' type='table' />
+          <relation connection='postgres.05ok52a1erbmrr15gcw4u0rl1tf3' name='vw_pld_hora_mes' table='[dw_campo_real].[vw_pld_hora_mes]' type='table' />
         </relation>
         <cols>
           <map key='[Table Name (fato_geracao1+)]' value='[fato_geracao1+].[Table Name]' />
           <map key='[Table Name]' value='[dim_tempo+].[Table Name]' />
+          <map key='[ano (vw_pld_hora_mes)]' value='[vw_pld_hora_mes].[ano]' />
           <map key='[ano]' value='[dim_tempo+].[ano]' />
+          <map key='[ano_mes (vw_geracao_mensal)]' value='[vw_geracao_mensal].[ano_mes]' />
           <map key='[ano_mes]' value='[dim_tempo+].[ano_mes]' />
           <map key='[atual]' value='[dim_usina].[atual]' />
+          <map key='[calculado_em]' value='[impacto_limpeza].[calculado_em]' />
           <map key='[cod_fonte (dim_fonte)]' value='[dim_fonte].[cod_fonte]' />
           <map key='[cod_fonte]' value='[dim_usina].[cod_fonte]' />
           <map key='[cod_submercado (dim_submercado)]' value='[dim_submercado].[cod_submercado]' />
+          <map key='[cod_submercado (vw_pld_hora_mes)]' value='[vw_pld_hora_mes].[cod_submercado]' />
           <map key='[cod_submercado]' value='[dim_usina].[cod_submercado]' />
+          <map key='[cod_usina (vw_correlacao_clima)]' value='[vw_correlacao_clima].[cod_usina]' />
+          <map key='[cod_usina (vw_geracao_mensal)]' value='[vw_geracao_mensal].[cod_usina]' />
           <map key='[cod_usina]' value='[dim_usina].[cod_usina]' />
           <map key='[confiavel]' value='[dim_status_qualidade].[confiavel]' />
+          <map key='[corr_radiacao]' value='[vw_correlacao_clima].[corr_radiacao]' />
+          <map key='[corr_temperatura]' value='[vw_correlacao_clima].[corr_temperatura]' />
+          <map key='[corr_vento]' value='[vw_correlacao_clima].[corr_vento]' />
           <map key='[data]' value='[dim_tempo+].[data]' />
           <map key='[data_hora]' value='[dim_tempo+].[data_hora]' />
           <map key='[data_inicio_operacao]' value='[dim_usina].[data_inicio_operacao]' />
@@ -83,6 +98,8 @@
           <map key='[dia]' value='[dim_tempo+].[dia]' />
           <map key='[dia_semana]' value='[dim_tempo+].[dia_semana]' />
           <map key='[dia_util]' value='[dim_tempo+].[dia_util]' />
+          <map key='[diferenca (fato_impacto_limpeza)]' value='[fato_impacto_limpeza].[diferenca]' />
+          <map key='[diferenca]' value='[impacto_limpeza].[diferenca]' />
           <map key='[dimensao]' value='[dim_regra_qualidade].[dimensao]' />
           <map key='[disponibilidade_mw (fato_geracao1+)]' value='[fato_geracao1+].[disponibilidade_mw]' />
           <map key='[disponibilidade_mw (fato_geracao2)]' value='[fato_geracao2].[disponibilidade_mw]' />
@@ -100,10 +117,12 @@
           <map key='[energia_nao_gerada_mwh (fato_parada_hora2)]' value='[fato_parada_hora2].[energia_nao_gerada_mwh]' />
           <map key='[energia_nao_gerada_mwh (fato_parada_hora3)]' value='[fato_parada_hora3].[energia_nao_gerada_mwh]' />
           <map key='[energia_nao_gerada_mwh]' value='[fato_parada_hora].[energia_nao_gerada_mwh]' />
+          <map key='[energia_possivel_mwh]' value='[vw_geracao_mensal].[energia_possivel_mwh]' />
           <map key='[estacao_ano]' value='[dim_tempo+].[estacao_ano]' />
           <map key='[faixa_horaria]' value='[dim_tempo+].[faixa_horaria]' />
           <map key='[fase (fato_qualidade1)]' value='[fato_qualidade1].[fase]' />
           <map key='[fase]' value='[fato_qualidade].[fase]' />
+          <map key='[fator_capacidade_pct]' value='[vw_geracao_mensal].[fator_capacidade_pct]' />
           <map key='[feriado]' value='[dim_tempo+].[feriado]' />
           <map key='[fim_de_semana]' value='[dim_tempo+].[fim_de_semana]' />
           <map key='[flags_qualidade (dim_usina)]' value='[dim_usina].[flags_qualidade]' />
@@ -113,9 +132,16 @@
           <map key='[flags_qualidade (fato_geracao4)]' value='[fato_geracao4].[flags_qualidade]' />
           <map key='[flags_qualidade (fato_geracao5)]' value='[fato_geracao5].[flags_qualidade]' />
           <map key='[flags_qualidade]' value='[dim_tempo+].[flags_qualidade]' />
+          <map key='[fonte (vw_captura_por_fonte)]' value='[vw_captura_por_fonte].[fonte]' />
+          <map key='[fonte (vw_correlacao_clima)]' value='[vw_correlacao_clima].[fonte]' />
+          <map key='[fonte (vw_geracao_mensal)]' value='[vw_geracao_mensal].[fonte]' />
           <map key='[fonte]' value='[dim_usina].[fonte]' />
+          <map key='[geracao_mwh (vw_geracao_mensal)]' value='[vw_geracao_mensal].[geracao_mwh]' />
+          <map key='[geracao_mwh]' value='[vw_captura_por_fonte].[geracao_mwh]' />
           <map key='[hash_atributos]' value='[dim_usina].[hash_atributos]' />
+          <map key='[hora (vw_pld_hora_mes)]' value='[vw_pld_hora_mes].[hora]' />
           <map key='[hora]' value='[dim_tempo+].[hora]' />
+          <map key='[horas]' value='[vw_correlacao_clima].[horas]' />
           <map key='[horas_indisponiveis (fato_parada_hora1)]' value='[fato_parada_hora1].[horas_indisponiveis]' />
           <map key='[horas_indisponiveis (fato_parada_hora2)]' value='[fato_parada_hora2].[horas_indisponiveis]' />
           <map key='[horas_indisponiveis (fato_parada_hora3)]' value='[fato_parada_hora3].[horas_indisponiveis]' />
@@ -126,11 +152,14 @@
           <map key='[id_parada (fato_parada_hora2)]' value='[fato_parada_hora2].[id_parada]' />
           <map key='[id_parada (fato_parada_hora3)]' value='[fato_parada_hora3].[id_parada]' />
           <map key='[id_parada]' value='[fato_parada_hora].[id_parada]' />
+          <map key='[indicador (fato_impacto_limpeza)]' value='[fato_impacto_limpeza].[indicador]' />
+          <map key='[indicador]' value='[impacto_limpeza].[indicador]' />
           <map key='[indice_qualidade (fato_qualidade1)]' value='[fato_qualidade1].[indice_qualidade]' />
           <map key='[indice_qualidade]' value='[fato_qualidade].[indice_qualidade]' />
           <map key='[intermitente]' value='[dim_fonte].[intermitente]' />
           <map key='[latitude]' value='[dim_usina].[latitude]' />
           <map key='[longitude]' value='[dim_usina].[longitude]' />
+          <map key='[mes (vw_pld_hora_mes)]' value='[vw_pld_hora_mes].[mes]' />
           <map key='[mes]' value='[dim_tempo+].[mes]' />
           <map key='[motivo (fato_parada_hora1)]' value='[fato_parada_hora1].[motivo]' />
           <map key='[motivo (fato_parada_hora2)]' value='[fato_parada_hora2].[motivo]' />
@@ -141,11 +170,14 @@
           <map key='[nome]' value='[dim_usina].[nome]' />
           <map key='[nome_dia_semana]' value='[dim_tempo+].[nome_dia_semana]' />
           <map key='[nome_feriado]' value='[dim_tempo+].[nome_feriado]' />
+          <map key='[nome_mes (vw_pld_hora_mes)]' value='[vw_pld_hora_mes].[nome_mes]' />
           <map key='[nome_mes]' value='[dim_tempo+].[nome_mes]' />
           <map key='[patamar_carga]' value='[dim_tempo+].[patamar_carga]' />
           <map key='[percentual_falha (fato_qualidade1)]' value='[fato_qualidade1].[percentual_falha]' />
           <map key='[percentual_falha]' value='[fato_qualidade].[percentual_falha]' />
           <map key='[periodo_hidrologico]' value='[dim_tempo+].[periodo_hidrologico]' />
+          <map key='[pld_medio]' value='[vw_pld_hora_mes].[pld_medio]' />
+          <map key='[pld_medio_referencia]' value='[vw_captura_por_fonte].[pld_medio_referencia]' />
           <map key='[pld_rs_mwh (fato_geracao1+)]' value='[fato_geracao1+].[pld_rs_mwh]' />
           <map key='[pld_rs_mwh (fato_geracao2)]' value='[fato_geracao2].[pld_rs_mwh]' />
           <map key='[pld_rs_mwh (fato_geracao3)]' value='[fato_geracao3].[pld_rs_mwh]' />
@@ -165,10 +197,12 @@
           <map key='[precipitacao_mm (fato_clima2)]' value='[fato_clima2].[precipitacao_mm]' />
           <map key='[precipitacao_mm (fato_clima3)]' value='[fato_clima3].[precipitacao_mm]' />
           <map key='[precipitacao_mm]' value='[fato_geracao1+].[precipitacao_mm]' />
+          <map key='[preco_capturado]' value='[vw_captura_por_fonte].[preco_capturado]' />
           <map key='[radiacao_wm2 (fato_clima1)]' value='[fato_clima1].[radiacao_wm2]' />
           <map key='[radiacao_wm2 (fato_clima2)]' value='[fato_clima2].[radiacao_wm2]' />
           <map key='[radiacao_wm2 (fato_clima3)]' value='[fato_clima3].[radiacao_wm2]' />
           <map key='[radiacao_wm2]' value='[fato_geracao1+].[radiacao_wm2]' />
+          <map key='[razao_captura]' value='[vw_captura_por_fonte].[razao_captura]' />
           <map key='[receita_nao_gerada_rs (fato_parada_hora1)]' value='[fato_parada_hora1].[receita_nao_gerada_rs]' />
           <map key='[receita_nao_gerada_rs (fato_parada_hora2)]' value='[fato_parada_hora2].[receita_nao_gerada_rs]' />
           <map key='[receita_nao_gerada_rs (fato_parada_hora3)]' value='[fato_parada_hora3].[receita_nao_gerada_rs]' />
@@ -179,6 +213,9 @@
           <map key='[receita_pld_rs (fato_geracao4)]' value='[fato_geracao4].[receita_pld_rs]' />
           <map key='[receita_pld_rs (fato_geracao5)]' value='[fato_geracao5].[receita_pld_rs]' />
           <map key='[receita_pld_rs]' value='[dim_tempo+].[receita_pld_rs]' />
+          <map key='[receita_rs]' value='[vw_captura_por_fonte].[receita_rs]' />
+          <map key='[recorte (fato_impacto_limpeza)]' value='[fato_impacto_limpeza].[recorte]' />
+          <map key='[recorte]' value='[impacto_limpeza].[recorte]' />
           <map key='[regioes]' value='[dim_submercado].[regioes]' />
           <map key='[registros_avaliados (fato_qualidade1)]' value='[fato_qualidade1].[registros_avaliados]' />
           <map key='[registros_avaliados]' value='[fato_qualidade].[registros_avaliados]' />
@@ -258,6 +295,7 @@
           <map key='[sk_usina (fato_parada_hora3)]' value='[fato_parada_hora3].[sk_usina]' />
           <map key='[sk_usina]' value='[dim_tempo+].[sk_usina]' />
           <map key='[status]' value='[dim_status_qualidade].[status]' />
+          <map key='[submercado (vw_geracao_mensal)]' value='[vw_geracao_mensal].[submercado]' />
           <map key='[submercado]' value='[dim_usina].[submercado]' />
           <map key='[tabela]' value='[dim_regra_qualidade].[tabela]' />
           <map key='[temperatura_c (fato_clima1)]' value='[fato_clima1].[temperatura_c]' />
@@ -267,8 +305,15 @@
           <map key='[tipo]' value='[dim_tipo_parada].[tipo]' />
           <map key='[trimestre]' value='[dim_tempo+].[trimestre]' />
           <map key='[uf]' value='[dim_usina].[uf]' />
+          <map key='[usina]' value='[vw_geracao_mensal].[usina]' />
           <map key='[valido_ate]' value='[dim_usina].[valido_ate]' />
           <map key='[valido_de]' value='[dim_usina].[valido_de]' />
+          <map key='[valor_antes (fato_impacto_limpeza)]' value='[fato_impacto_limpeza].[valor_antes]' />
+          <map key='[valor_antes]' value='[impacto_limpeza].[valor_antes]' />
+          <map key='[valor_depois (fato_impacto_limpeza)]' value='[fato_impacto_limpeza].[valor_depois]' />
+          <map key='[valor_depois]' value='[impacto_limpeza].[valor_depois]' />
+          <map key='[variacao_pct (fato_impacto_limpeza)]' value='[fato_impacto_limpeza].[variacao_pct]' />
+          <map key='[variacao_pct]' value='[impacto_limpeza].[variacao_pct]' />
           <map key='[vento_100m_kmh (fato_clima1)]' value='[fato_clima1].[vento_100m_kmh]' />
           <map key='[vento_100m_kmh (fato_clima2)]' value='[fato_clima2].[vento_100m_kmh]' />
           <map key='[vento_100m_kmh (fato_clima3)]' value='[fato_clima3].[vento_100m_kmh]' />
@@ -3196,35 +3241,641 @@
             <contains-null>true</contains-null>
             <object-id>[fato_parada_hora (dw_campo_real.fato_parada_hora)_0D1FDF8A202346BC886945907F01EED5]</object-id>
           </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>indicador</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[indicador (fato_impacto_limpeza)]</local-name>
+            <parent-name>[fato_impacto_limpeza]</parent-name>
+            <remote-alias>indicador</remote-alias>
+            <ordinal>235</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>80</width>
+            <contains-null>false</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[fato_impacto_limpeza (dw_campo_real.fato_impacto_limpeza)_5A3D3E85CCAC47BC8868EA2062AD0899]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>recorte</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[recorte (fato_impacto_limpeza)]</local-name>
+            <parent-name>[fato_impacto_limpeza]</parent-name>
+            <remote-alias>recorte</remote-alias>
+            <ordinal>236</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>40</width>
+            <contains-null>false</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[fato_impacto_limpeza (dw_campo_real.fato_impacto_limpeza)_5A3D3E85CCAC47BC8868EA2062AD0899]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>valor_antes</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[valor_antes (fato_impacto_limpeza)]</local-name>
+            <parent-name>[fato_impacto_limpeza]</parent-name>
+            <remote-alias>valor_antes</remote-alias>
+            <ordinal>237</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>18</precision>
+            <scale>2</scale>
+            <contains-null>true</contains-null>
+            <object-id>[fato_impacto_limpeza (dw_campo_real.fato_impacto_limpeza)_5A3D3E85CCAC47BC8868EA2062AD0899]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>valor_depois</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[valor_depois (fato_impacto_limpeza)]</local-name>
+            <parent-name>[fato_impacto_limpeza]</parent-name>
+            <remote-alias>valor_depois</remote-alias>
+            <ordinal>238</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>18</precision>
+            <scale>2</scale>
+            <contains-null>true</contains-null>
+            <object-id>[fato_impacto_limpeza (dw_campo_real.fato_impacto_limpeza)_5A3D3E85CCAC47BC8868EA2062AD0899]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>diferenca</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[diferenca (fato_impacto_limpeza)]</local-name>
+            <parent-name>[fato_impacto_limpeza]</parent-name>
+            <remote-alias>diferenca</remote-alias>
+            <ordinal>239</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>18</precision>
+            <scale>2</scale>
+            <contains-null>true</contains-null>
+            <object-id>[fato_impacto_limpeza (dw_campo_real.fato_impacto_limpeza)_5A3D3E85CCAC47BC8868EA2062AD0899]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>variacao_pct</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[variacao_pct (fato_impacto_limpeza)]</local-name>
+            <parent-name>[fato_impacto_limpeza]</parent-name>
+            <remote-alias>variacao_pct</remote-alias>
+            <ordinal>240</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>9</precision>
+            <scale>4</scale>
+            <contains-null>true</contains-null>
+            <object-id>[fato_impacto_limpeza (dw_campo_real.fato_impacto_limpeza)_5A3D3E85CCAC47BC8868EA2062AD0899]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>indicador</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[indicador]</local-name>
+            <parent-name>[impacto_limpeza]</parent-name>
+            <remote-alias>indicador</remote-alias>
+            <ordinal>242</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>80</width>
+            <contains-null>false</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[impacto_limpeza (qualidade.impacto_limpeza)_DAE804DF93094BA6ACA6EB6769436E99]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>recorte</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[recorte]</local-name>
+            <parent-name>[impacto_limpeza]</parent-name>
+            <remote-alias>recorte</remote-alias>
+            <ordinal>243</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>40</width>
+            <contains-null>false</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[impacto_limpeza (qualidade.impacto_limpeza)_DAE804DF93094BA6ACA6EB6769436E99]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>valor_antes</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[valor_antes]</local-name>
+            <parent-name>[impacto_limpeza]</parent-name>
+            <remote-alias>valor_antes</remote-alias>
+            <ordinal>244</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>18</precision>
+            <scale>2</scale>
+            <contains-null>true</contains-null>
+            <object-id>[impacto_limpeza (qualidade.impacto_limpeza)_DAE804DF93094BA6ACA6EB6769436E99]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>valor_depois</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[valor_depois]</local-name>
+            <parent-name>[impacto_limpeza]</parent-name>
+            <remote-alias>valor_depois</remote-alias>
+            <ordinal>245</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>18</precision>
+            <scale>2</scale>
+            <contains-null>true</contains-null>
+            <object-id>[impacto_limpeza (qualidade.impacto_limpeza)_DAE804DF93094BA6ACA6EB6769436E99]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>diferenca</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[diferenca]</local-name>
+            <parent-name>[impacto_limpeza]</parent-name>
+            <remote-alias>diferenca</remote-alias>
+            <ordinal>246</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>18</precision>
+            <scale>2</scale>
+            <contains-null>true</contains-null>
+            <object-id>[impacto_limpeza (qualidade.impacto_limpeza)_DAE804DF93094BA6ACA6EB6769436E99]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>variacao_pct</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[variacao_pct]</local-name>
+            <parent-name>[impacto_limpeza]</parent-name>
+            <remote-alias>variacao_pct</remote-alias>
+            <ordinal>247</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>9</precision>
+            <scale>4</scale>
+            <contains-null>true</contains-null>
+            <object-id>[impacto_limpeza (qualidade.impacto_limpeza)_DAE804DF93094BA6ACA6EB6769436E99]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>calculado_em</remote-name>
+            <remote-type>135</remote-type>
+            <local-name>[calculado_em]</local-name>
+            <parent-name>[impacto_limpeza]</parent-name>
+            <remote-alias>calculado_em</remote-alias>
+            <ordinal>248</ordinal>
+            <local-type>datetime</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>false</contains-null>
+            <object-id>[impacto_limpeza (qualidade.impacto_limpeza)_DAE804DF93094BA6ACA6EB6769436E99]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>fonte</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[fonte (vw_captura_por_fonte)]</local-name>
+            <parent-name>[vw_captura_por_fonte]</parent-name>
+            <remote-alias>fonte</remote-alias>
+            <ordinal>250</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>40</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[vw_captura_por_fonte (dw_campo_real.vw_captura_por_fonte)_2DD9CF8B974A48A790F2630BEFB8DD52]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>geracao_mwh</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[geracao_mwh]</local-name>
+            <parent-name>[vw_captura_por_fonte]</parent-name>
+            <remote-alias>geracao_mwh</remote-alias>
+            <ordinal>251</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>17</precision>
+            <contains-null>true</contains-null>
+            <object-id>[vw_captura_por_fonte (dw_campo_real.vw_captura_por_fonte)_2DD9CF8B974A48A790F2630BEFB8DD52]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>receita_rs</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[receita_rs]</local-name>
+            <parent-name>[vw_captura_por_fonte]</parent-name>
+            <remote-alias>receita_rs</remote-alias>
+            <ordinal>252</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>17</precision>
+            <contains-null>true</contains-null>
+            <object-id>[vw_captura_por_fonte (dw_campo_real.vw_captura_por_fonte)_2DD9CF8B974A48A790F2630BEFB8DD52]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>preco_capturado</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[preco_capturado]</local-name>
+            <parent-name>[vw_captura_por_fonte]</parent-name>
+            <remote-alias>preco_capturado</remote-alias>
+            <ordinal>253</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>17</precision>
+            <contains-null>true</contains-null>
+            <object-id>[vw_captura_por_fonte (dw_campo_real.vw_captura_por_fonte)_2DD9CF8B974A48A790F2630BEFB8DD52]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>pld_medio_referencia</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[pld_medio_referencia]</local-name>
+            <parent-name>[vw_captura_por_fonte]</parent-name>
+            <remote-alias>pld_medio_referencia</remote-alias>
+            <ordinal>254</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>17</precision>
+            <contains-null>true</contains-null>
+            <object-id>[vw_captura_por_fonte (dw_campo_real.vw_captura_por_fonte)_2DD9CF8B974A48A790F2630BEFB8DD52]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>razao_captura</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[razao_captura]</local-name>
+            <parent-name>[vw_captura_por_fonte]</parent-name>
+            <remote-alias>razao_captura</remote-alias>
+            <ordinal>255</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>17</precision>
+            <contains-null>true</contains-null>
+            <object-id>[vw_captura_por_fonte (dw_campo_real.vw_captura_por_fonte)_2DD9CF8B974A48A790F2630BEFB8DD52]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>cod_usina</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[cod_usina (vw_correlacao_clima)]</local-name>
+            <parent-name>[vw_correlacao_clima]</parent-name>
+            <remote-alias>cod_usina</remote-alias>
+            <ordinal>257</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>12</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[vw_correlacao_clima (dw_campo_real.vw_correlacao_clima)_39B3D68D32724AA4A2F802CE55042E9E]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>fonte</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[fonte (vw_correlacao_clima)]</local-name>
+            <parent-name>[vw_correlacao_clima]</parent-name>
+            <remote-alias>fonte</remote-alias>
+            <ordinal>258</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>40</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[vw_correlacao_clima (dw_campo_real.vw_correlacao_clima)_39B3D68D32724AA4A2F802CE55042E9E]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>corr_radiacao</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[corr_radiacao]</local-name>
+            <parent-name>[vw_correlacao_clima]</parent-name>
+            <remote-alias>corr_radiacao</remote-alias>
+            <ordinal>259</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>17</precision>
+            <contains-null>true</contains-null>
+            <object-id>[vw_correlacao_clima (dw_campo_real.vw_correlacao_clima)_39B3D68D32724AA4A2F802CE55042E9E]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>corr_vento</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[corr_vento]</local-name>
+            <parent-name>[vw_correlacao_clima]</parent-name>
+            <remote-alias>corr_vento</remote-alias>
+            <ordinal>260</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>17</precision>
+            <contains-null>true</contains-null>
+            <object-id>[vw_correlacao_clima (dw_campo_real.vw_correlacao_clima)_39B3D68D32724AA4A2F802CE55042E9E]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>corr_temperatura</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[corr_temperatura]</local-name>
+            <parent-name>[vw_correlacao_clima]</parent-name>
+            <remote-alias>corr_temperatura</remote-alias>
+            <ordinal>261</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>17</precision>
+            <contains-null>true</contains-null>
+            <object-id>[vw_correlacao_clima (dw_campo_real.vw_correlacao_clima)_39B3D68D32724AA4A2F802CE55042E9E]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>horas</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[horas]</local-name>
+            <parent-name>[vw_correlacao_clima]</parent-name>
+            <remote-alias>horas</remote-alias>
+            <ordinal>262</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>19</precision>
+            <contains-null>true</contains-null>
+            <object-id>[vw_correlacao_clima (dw_campo_real.vw_correlacao_clima)_39B3D68D32724AA4A2F802CE55042E9E]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ano_mes</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[ano_mes (vw_geracao_mensal)]</local-name>
+            <parent-name>[vw_geracao_mensal]</parent-name>
+            <remote-alias>ano_mes</remote-alias>
+            <ordinal>264</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>7</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[vw_geracao_mensal (dw_campo_real.vw_geracao_mensal)_3266F593A881489BBEEDB8026149A846]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>cod_usina</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[cod_usina (vw_geracao_mensal)]</local-name>
+            <parent-name>[vw_geracao_mensal]</parent-name>
+            <remote-alias>cod_usina</remote-alias>
+            <ordinal>265</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>12</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[vw_geracao_mensal (dw_campo_real.vw_geracao_mensal)_3266F593A881489BBEEDB8026149A846]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>usina</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[usina]</local-name>
+            <parent-name>[vw_geracao_mensal]</parent-name>
+            <remote-alias>usina</remote-alias>
+            <ordinal>266</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>80</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[vw_geracao_mensal (dw_campo_real.vw_geracao_mensal)_3266F593A881489BBEEDB8026149A846]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>fonte</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[fonte (vw_geracao_mensal)]</local-name>
+            <parent-name>[vw_geracao_mensal]</parent-name>
+            <remote-alias>fonte</remote-alias>
+            <ordinal>267</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>40</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[vw_geracao_mensal (dw_campo_real.vw_geracao_mensal)_3266F593A881489BBEEDB8026149A846]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>submercado</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[submercado (vw_geracao_mensal)]</local-name>
+            <parent-name>[vw_geracao_mensal]</parent-name>
+            <remote-alias>submercado</remote-alias>
+            <ordinal>268</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>40</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[vw_geracao_mensal (dw_campo_real.vw_geracao_mensal)_3266F593A881489BBEEDB8026149A846]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>geracao_mwh</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[geracao_mwh (vw_geracao_mensal)]</local-name>
+            <parent-name>[vw_geracao_mensal]</parent-name>
+            <remote-alias>geracao_mwh</remote-alias>
+            <ordinal>269</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>17</precision>
+            <contains-null>true</contains-null>
+            <object-id>[vw_geracao_mensal (dw_campo_real.vw_geracao_mensal)_3266F593A881489BBEEDB8026149A846]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>energia_possivel_mwh</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[energia_possivel_mwh]</local-name>
+            <parent-name>[vw_geracao_mensal]</parent-name>
+            <remote-alias>energia_possivel_mwh</remote-alias>
+            <ordinal>270</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>17</precision>
+            <contains-null>true</contains-null>
+            <object-id>[vw_geracao_mensal (dw_campo_real.vw_geracao_mensal)_3266F593A881489BBEEDB8026149A846]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>fator_capacidade_pct</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[fator_capacidade_pct]</local-name>
+            <parent-name>[vw_geracao_mensal]</parent-name>
+            <remote-alias>fator_capacidade_pct</remote-alias>
+            <ordinal>271</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>17</precision>
+            <contains-null>true</contains-null>
+            <object-id>[vw_geracao_mensal (dw_campo_real.vw_geracao_mensal)_3266F593A881489BBEEDB8026149A846]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ano</remote-name>
+            <remote-type>2</remote-type>
+            <local-name>[ano (vw_pld_hora_mes)]</local-name>
+            <parent-name>[vw_pld_hora_mes]</parent-name>
+            <remote-alias>ano</remote-alias>
+            <ordinal>273</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>5</precision>
+            <contains-null>true</contains-null>
+            <object-id>[vw_pld_hora_mes (dw_campo_real.vw_pld_hora_mes)_6F07E122054844569268234C3BB5B56A]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mes</remote-name>
+            <remote-type>2</remote-type>
+            <local-name>[mes (vw_pld_hora_mes)]</local-name>
+            <parent-name>[vw_pld_hora_mes]</parent-name>
+            <remote-alias>mes</remote-alias>
+            <ordinal>274</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>5</precision>
+            <contains-null>true</contains-null>
+            <object-id>[vw_pld_hora_mes (dw_campo_real.vw_pld_hora_mes)_6F07E122054844569268234C3BB5B56A]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>nome_mes</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[nome_mes (vw_pld_hora_mes)]</local-name>
+            <parent-name>[vw_pld_hora_mes]</parent-name>
+            <remote-alias>nome_mes</remote-alias>
+            <ordinal>275</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>10</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[vw_pld_hora_mes (dw_campo_real.vw_pld_hora_mes)_6F07E122054844569268234C3BB5B56A]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>hora</remote-name>
+            <remote-type>2</remote-type>
+            <local-name>[hora (vw_pld_hora_mes)]</local-name>
+            <parent-name>[vw_pld_hora_mes]</parent-name>
+            <remote-alias>hora</remote-alias>
+            <ordinal>276</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>5</precision>
+            <contains-null>true</contains-null>
+            <object-id>[vw_pld_hora_mes (dw_campo_real.vw_pld_hora_mes)_6F07E122054844569268234C3BB5B56A]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>cod_submercado</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[cod_submercado (vw_pld_hora_mes)]</local-name>
+            <parent-name>[vw_pld_hora_mes]</parent-name>
+            <remote-alias>cod_submercado</remote-alias>
+            <ordinal>277</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>2</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[vw_pld_hora_mes (dw_campo_real.vw_pld_hora_mes)_6F07E122054844569268234C3BB5B56A]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>pld_medio</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[pld_medio]</local-name>
+            <parent-name>[vw_pld_hora_mes]</parent-name>
+            <remote-alias>pld_medio</remote-alias>
+            <ordinal>278</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>17</precision>
+            <contains-null>true</contains-null>
+            <object-id>[vw_pld_hora_mes (dw_campo_real.vw_pld_hora_mes)_6F07E122054844569268234C3BB5B56A]</object-id>
+          </metadata-record>
         </metadata-records>
       </connection>
       <aliases enabled='yes' />
-      <column caption='Geração MWh' datatype='real' name='[Calculation_1833776977383427]' role='measure' type='quantitative'>
-        <calculation class='tableau' formula='' />
+      <column caption='Geração MWh' datatype='real' name='[Calculation_1833776979263500]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([energia_mwh])' />
       </column>
-      <column caption='Receita PLD' datatype='real' name='[Calculation_1833776977473540]' role='measure' type='quantitative'>
-        <calculation class='tableau' formula='' />
+      <column caption='Receita PLD (R$)' datatype='real' name='[Calculation_1833776979300365]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([receita_pld_rs])' />
       </column>
-      <column caption=' Preço capturado' datatype='real' name='[Calculation_1833776977539077]' role='measure' type='quantitative'>
-        <calculation class='tableau' formula='' />
+      <column caption='Geração valorada MWh' datatype='real' name='[Calculation_1833776979345422]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM(IF NOT ISNULL([receita_pld_rs]) THEN [energia_mwh] END)' />
       </column>
-      <column caption='PLD médio' datatype='real' name='[Calculation_1833776977567750]' role='measure' type='quantitative'>
-        <calculation class='tableau' formula='' />
+      <column caption='Preço capturado (R$/MWh)' datatype='real' name='[Calculation_1833776979394575]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='[Calculation_1833776979300365] / [Calculation_1833776979345422]' />
       </column>
-      <column caption='Razão de captura' datatype='real' name='[Calculation_1833776977612807]' role='measure' type='quantitative'>
-        <calculation class='tableau' formula='' />
+      <column caption='PLD médio (R$/MWh)' datatype='real' name='[Calculation_1833776979472400]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='AVG([pld_rs_mwh])' />
       </column>
-      <column caption='Fator de capacidade' datatype='real' name='[Calculation_1833776977641480]' role='measure' type='quantitative'>
-        <calculation class='tableau' formula='' />
+      <column caption='Razão de captura' datatype='real' name='[Calculation_1833776979542033]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='[Calculation_1833776979394575] / [Calculation_1833776979472400]' />
       </column>
-      <column caption='paradas' datatype='real' name='[Calculation_1833776977666057]' role='measure' type='quantitative'>
-        <calculation class='tableau' formula='' />
+      <column caption='Fator de capacidade' datatype='real' name='[Calculation_1833776979582994]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([energia_mwh]) / SUM([potencia_mw])' />
       </column>
-      <column caption='clima' datatype='real' name='[Calculation_1833776977702922]' role='measure' type='quantitative'>
-        <calculation class='tableau' formula='' />
+      <column caption='Horas indisponíveis' datatype='real' name='[Calculation_1833776979623955]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([horas_indisponiveis])' />
       </column>
-      <column caption=' qualidade antes/depois e impacto da limpeza' datatype='real' name='[Calculation_1833776977735691]' role='measure' type='quantitative'>
-        <calculation class='tableau' formula='' />
+      <column caption='Energia não gerada (MWh)' datatype='real' name='[Calculation_1833776979697684]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([energia_nao_gerada_mwh])' />
+      </column>
+      <column caption='Receita não gerada (R$)' datatype='real' name='[Calculation_1833776979730453]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([receita_nao_gerada_rs])' />
+      </column>
+      <column caption='Radiação média (W/m²)AVG([radiacao_wm2])' datatype='real' name='[Calculation_1833776979767318]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='AVG([radiacao_wm2])' />
+      </column>
+      <column caption='Vento médio 100 m (km/h)' datatype='real' name='[Calculation_1833776979816471]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='AVG([vento_100m_kmh])' />
+      </column>
+      <column caption='Índice da dimensão' datatype='real' name='[Calculation_1833776979857432]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='AVG(IF [registros_avaliados] &gt; 0 THEN [indice_qualidade] END)' />
+      </column>
+      <column caption='Índice geral' datatype='real' name='[Calculation_1833776979898393]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='WINDOW_AVG([Calculation_1833776979857432])   // Calcular usando: dimensao (dimensao no Detalhe)'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Falhas antes' datatype='integer' name='[Calculation_1833776979935258]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM(IF [fase] = &quot;ANTES&quot;  THEN [registros_falha] END)' />
+      </column>
+      <column caption='Falhas depois' datatype='integer' name='[Calculation_1833776979988507]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM(IF [fase] = &quot;DEPOIS&quot; THEN [registros_falha] END)' />
+      </column>
+      <column caption='Receita antes (R$)' datatype='real' name='[Calculation_1833776980029468]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM(IF [indicador]=&quot;receita_pld_rs&quot; AND [recorte]=&quot;TOTAL&quot; THEN [valor_depois] END)' />
+      </column>
+      <column caption='Receita depois (R$)' datatype='real' name='[Calculation_1833776980074525]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM(IF [indicador]=&quot;receita_pld_rs&quot; AND [recorte]=&quot;TOTAL&quot; THEN [valor_depois] END)' />
+      </column>
+      <column caption='Variação da receita' datatype='real' name='[Calculation_1833776980664350]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='([Calculation_1833776980074525] - [Calculation_1833776980029468]) / [Calculation_1833776980029468]' />
+      </column>
+      <column caption='Geração antes (MWh)' datatype='real' name='[Calculation_1833776980705311]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM(IF [indicador]=&quot;geracao_mwh&quot; AND [recorte]=&quot;TOTAL&quot; THEN [valor_antes]  END)' />
+      </column>
+      <column caption='Geração depois (MWh)' datatype='real' name='[Calculation_1833776980754464]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM(IF [indicador]=&quot;geracao_mwh&quot; AND [recorte]=&quot;TOTAL&quot; THEN [valor_depois] END)' />
       </column>
       <column caption='dim_fonte' datatype='table' name='[__tableau_internal_object_id__].[dim_fonte (dw_campo_real.dim_fonte)_8A830390970F4F069BCA3BC0542CEF9D]' role='measure' type='quantitative' />
       <column caption='dim_regra_qualidade' datatype='table' name='[__tableau_internal_object_id__].[dim_regra_qualidade (dw_campo_real.dim_regra_qualidade)_1B7AC54C3E3248FA9DE13D798341E7C8]' role='measure' type='quantitative' />
@@ -3241,6 +3892,7 @@
       <column caption='fato_geracao3' datatype='table' name='[__tableau_internal_object_id__].[fato_geracao (dw_campo_real.fato_geracao)_7B16775BBC174EB0B91E856227CFE68D]' role='measure' type='quantitative' />
       <column caption='fato_geracao4' datatype='table' name='[__tableau_internal_object_id__].[fato_geracao (dw_campo_real.fato_geracao)_BDA35BCF9C964845A214BB11EABFA768]' role='measure' type='quantitative' />
       <column caption='fato_geracao5' datatype='table' name='[__tableau_internal_object_id__].[fato_geracao (dw_campo_real.fato_geracao)_F7DFCC23FC7A4ACD90376CE077315B7E]' role='measure' type='quantitative' />
+      <column caption='fato_impacto_limpeza' datatype='table' name='[__tableau_internal_object_id__].[fato_impacto_limpeza (dw_campo_real.fato_impacto_limpeza)_5A3D3E85CCAC47BC8868EA2062AD0899]' role='measure' type='quantitative' />
       <column caption='fato_parada_hora1' datatype='table' name='[__tableau_internal_object_id__].[fato_parada_hora (dw_campo_real.fato_parada_hora)_0D1FDF8A202346BC886945907F01EED5]' role='measure' type='quantitative' />
       <column caption='fato_parada_hora2' datatype='table' name='[__tableau_internal_object_id__].[fato_parada_hora (dw_campo_real.fato_parada_hora)_C6D34CDAC4554FE09AA9C14223EB1E4C]' role='measure' type='quantitative' />
       <column caption='fato_parada_hora' datatype='table' name='[__tableau_internal_object_id__].[fato_parada_hora (dw_campo_real.fato_parada_hora)_DAA6B3EF875847AB93BE03490625ACA4]' role='measure' type='quantitative' />
@@ -3249,15 +3901,29 @@
       <column caption='fato_pld1' datatype='table' name='[__tableau_internal_object_id__].[fato_pld (dw_campo_real.fato_pld)_A95AAAAEF2D24342B7F2BBDCF3AD2E10]' role='measure' type='quantitative' />
       <column caption='fato_qualidade1' datatype='table' name='[__tableau_internal_object_id__].[fato_qualidade (dw_campo_real.fato_qualidade)_7769F3B86C1D4A938B80D0F05BB89E7E]' role='measure' type='quantitative' />
       <column caption='fato_qualidade' datatype='table' name='[__tableau_internal_object_id__].[fato_qualidade (dw_campo_real.fato_qualidade)_9C39ACC1C35B46739F8D11AC3378A26C]' role='measure' type='quantitative' />
+      <column caption='impacto_limpeza' datatype='table' name='[__tableau_internal_object_id__].[impacto_limpeza (qualidade.impacto_limpeza)_DAE804DF93094BA6ACA6EB6769436E99]' role='measure' type='quantitative' />
+      <column caption='vw_captura_por_fonte' datatype='table' name='[__tableau_internal_object_id__].[vw_captura_por_fonte (dw_campo_real.vw_captura_por_fonte)_2DD9CF8B974A48A790F2630BEFB8DD52]' role='measure' type='quantitative' />
+      <column caption='vw_correlacao_clima' datatype='table' name='[__tableau_internal_object_id__].[vw_correlacao_clima (dw_campo_real.vw_correlacao_clima)_39B3D68D32724AA4A2F802CE55042E9E]' role='measure' type='quantitative' />
+      <column caption='vw_geracao_mensal' datatype='table' name='[__tableau_internal_object_id__].[vw_geracao_mensal (dw_campo_real.vw_geracao_mensal)_3266F593A881489BBEEDB8026149A846]' role='measure' type='quantitative' />
+      <column caption='vw_pld_hora_mes' datatype='table' name='[__tableau_internal_object_id__].[vw_pld_hora_mes (dw_campo_real.vw_pld_hora_mes)_6F07E122054844569268234C3BB5B56A]' role='measure' type='quantitative' />
+      <column caption='Ano (Vw Pld Hora Mes)' datatype='integer' name='[ano (vw_pld_hora_mes)]' role='dimension' type='quantitative' />
       <column caption='Ano' datatype='integer' name='[ano]' role='dimension' type='quantitative' />
+      <column caption='Ano Mes (Vw Geracao Mensal)' datatype='string' name='[ano_mes (vw_geracao_mensal)]' role='dimension' type='nominal' />
       <column caption='Ano Mes' datatype='string' name='[ano_mes]' role='dimension' type='nominal' />
       <column caption='Atual' datatype='boolean' name='[atual]' role='dimension' type='nominal' />
+      <column caption='Calculado Em' datatype='datetime' name='[calculado_em]' role='dimension' type='ordinal' />
       <column caption='Cod Fonte (Dim Fonte)' datatype='string' name='[cod_fonte (dim_fonte)]' role='dimension' type='nominal' />
       <column caption='Cod Fonte' datatype='string' name='[cod_fonte]' role='dimension' type='nominal' />
       <column caption='Cod Submercado (Dim Submercado)' datatype='string' name='[cod_submercado (dim_submercado)]' role='dimension' type='nominal' />
+      <column caption='Cod Submercado (Vw Pld Hora Mes)' datatype='string' name='[cod_submercado (vw_pld_hora_mes)]' role='dimension' type='nominal' />
       <column caption='Cod Submercado' datatype='string' name='[cod_submercado]' role='dimension' type='nominal' />
+      <column caption='Cod Usina (Vw Correlacao Clima)' datatype='string' name='[cod_usina (vw_correlacao_clima)]' role='dimension' type='nominal' />
+      <column caption='Cod Usina (Vw Geracao Mensal)' datatype='string' name='[cod_usina (vw_geracao_mensal)]' role='dimension' type='nominal' />
       <column caption='Cod Usina' datatype='string' name='[cod_usina]' role='dimension' type='nominal' />
       <column caption='Confiavel' datatype='boolean' name='[confiavel]' role='dimension' type='nominal' />
+      <column caption='Corr Radiacao' datatype='real' name='[corr_radiacao]' role='measure' type='quantitative' />
+      <column caption='Corr Temperatura' datatype='real' name='[corr_temperatura]' role='measure' type='quantitative' />
+      <column caption='Corr Vento' datatype='real' name='[corr_vento]' role='measure' type='quantitative' />
       <column caption='Data' datatype='date' name='[data]' role='dimension' type='ordinal' />
       <column caption='Data Hora' datatype='datetime' name='[data_hora]' role='dimension' type='ordinal' />
       <column caption='Data Inicio Operacao' datatype='date' name='[data_inicio_operacao]' role='dimension' type='ordinal' />
@@ -3269,6 +3935,8 @@
       <column caption='Dia' datatype='integer' name='[dia]' role='dimension' type='quantitative' />
       <column caption='Dia Semana' datatype='integer' name='[dia_semana]' role='dimension' type='quantitative' />
       <column caption='Dia Util' datatype='boolean' name='[dia_util]' role='dimension' type='nominal' />
+      <column caption='Diferenca (Fato Impacto Limpeza)' datatype='real' name='[diferenca (fato_impacto_limpeza)]' role='measure' type='quantitative' />
+      <column caption='Diferenca' datatype='real' name='[diferenca]' role='measure' type='quantitative' />
       <column caption='Dimensao' datatype='string' name='[dimensao]' role='dimension' type='nominal' />
       <column caption='Disponibilidade Mw (Fato Geracao2)' datatype='real' name='[disponibilidade_mw (fato_geracao2)]' role='measure' type='quantitative' />
       <column caption='Disponibilidade Mw (Fato Geracao3)' datatype='real' name='[disponibilidade_mw (fato_geracao3)]' role='measure' type='quantitative' />
@@ -3282,10 +3950,12 @@
       <column caption='Energia Nao Gerada Mwh (Fato Parada Hora2)' datatype='real' name='[energia_nao_gerada_mwh (fato_parada_hora2)]' role='measure' type='quantitative' />
       <column caption='Energia Nao Gerada Mwh (Fato Parada Hora3)' datatype='real' name='[energia_nao_gerada_mwh (fato_parada_hora3)]' role='measure' type='quantitative' />
       <column caption='Energia Nao Gerada Mwh' datatype='real' name='[energia_nao_gerada_mwh]' role='measure' type='quantitative' />
+      <column caption='Energia Possivel Mwh' datatype='real' name='[energia_possivel_mwh]' role='measure' type='quantitative' />
       <column caption='Estacao Ano' datatype='string' name='[estacao_ano]' role='dimension' type='nominal' />
       <column caption='Faixa Horaria' datatype='string' name='[faixa_horaria]' role='dimension' type='nominal' />
       <column caption='Fase (Fato Qualidade1)' datatype='string' name='[fase (fato_qualidade1)]' role='dimension' type='nominal' />
       <column caption='Fase' datatype='string' name='[fase]' role='dimension' type='nominal' />
+      <column caption='Fator Capacidade Pct' datatype='real' name='[fator_capacidade_pct]' role='measure' type='quantitative' />
       <column caption='Feriado' datatype='boolean' name='[feriado]' role='dimension' type='nominal' />
       <column caption='Fim De Semana' datatype='boolean' name='[fim_de_semana]' role='dimension' type='nominal' />
       <column caption='Flags Qualidade (Dim Usina)' datatype='string' name='[flags_qualidade (dim_usina)]' role='dimension' type='nominal' />
@@ -3293,9 +3963,16 @@
       <column caption='Flags Qualidade (Fato Geracao3)' datatype='string' name='[flags_qualidade (fato_geracao3)]' role='dimension' type='nominal' />
       <column caption='Flags Qualidade (Fato Geracao4)' datatype='string' name='[flags_qualidade (fato_geracao4)]' role='dimension' type='nominal' />
       <column caption='Flags Qualidade (Fato Geracao5)' datatype='string' name='[flags_qualidade (fato_geracao5)]' role='dimension' type='nominal' />
+      <column caption='Fonte (Vw Captura Por Fonte)' datatype='string' name='[fonte (vw_captura_por_fonte)]' role='dimension' type='nominal' />
+      <column caption='Fonte (Vw Correlacao Clima)' datatype='string' name='[fonte (vw_correlacao_clima)]' role='dimension' type='nominal' />
+      <column caption='Fonte (Vw Geracao Mensal)' datatype='string' name='[fonte (vw_geracao_mensal)]' role='dimension' type='nominal' />
       <column caption='Fonte' datatype='string' name='[fonte]' role='dimension' type='nominal' />
+      <column caption='Geracao Mwh (Vw Geracao Mensal)' datatype='real' name='[geracao_mwh (vw_geracao_mensal)]' role='measure' type='quantitative' />
+      <column caption='Geracao Mwh' datatype='real' name='[geracao_mwh]' role='measure' type='quantitative' />
       <column caption='Hash Atributos' datatype='string' name='[hash_atributos]' role='dimension' type='nominal' />
+      <column caption='Hora (Vw Pld Hora Mes)' datatype='integer' name='[hora (vw_pld_hora_mes)]' role='measure' type='quantitative' />
       <column caption='Hora' datatype='integer' name='[hora]' role='measure' type='quantitative' />
+      <column caption='Horas' datatype='integer' name='[horas]' role='measure' type='quantitative' />
       <column caption='Horas Indisponiveis (Fato Parada Hora1)' datatype='real' name='[horas_indisponiveis (fato_parada_hora1)]' role='measure' type='quantitative' />
       <column caption='Horas Indisponiveis (Fato Parada Hora2)' datatype='real' name='[horas_indisponiveis (fato_parada_hora2)]' role='measure' type='quantitative' />
       <column caption='Horas Indisponiveis (Fato Parada Hora3)' datatype='real' name='[horas_indisponiveis (fato_parada_hora3)]' role='measure' type='quantitative' />
@@ -3306,11 +3983,14 @@
       <column caption='Id Parada (Fato Parada Hora2)' datatype='integer' name='[id_parada (fato_parada_hora2)]' role='dimension' type='ordinal' />
       <column caption='Id Parada (Fato Parada Hora3)' datatype='integer' name='[id_parada (fato_parada_hora3)]' role='dimension' type='ordinal' />
       <column caption='Id Parada' datatype='integer' name='[id_parada]' role='dimension' type='ordinal' />
+      <column caption='Indicador (Fato Impacto Limpeza)' datatype='string' name='[indicador (fato_impacto_limpeza)]' role='dimension' type='nominal' />
+      <column caption='Indicador' datatype='string' name='[indicador]' role='dimension' type='nominal' />
       <column caption='Indice Qualidade (Fato Qualidade1)' datatype='real' name='[indice_qualidade (fato_qualidade1)]' role='measure' type='quantitative' />
       <column caption='Indice Qualidade' datatype='real' name='[indice_qualidade]' role='measure' type='quantitative' />
       <column caption='Intermitente' datatype='string' name='[intermitente]' role='dimension' type='nominal' />
       <column aggregation='Avg' caption='Latitude' datatype='real' name='[latitude]' role='measure' semantic-role='[Geographical].[Latitude]' type='quantitative' />
       <column aggregation='Avg' caption='Longitude' datatype='real' name='[longitude]' role='measure' semantic-role='[Geographical].[Longitude]' type='quantitative' />
+      <column caption='Mes (Vw Pld Hora Mes)' datatype='integer' name='[mes (vw_pld_hora_mes)]' role='measure' type='quantitative' />
       <column caption='Mes' datatype='integer' name='[mes]' role='measure' type='quantitative' />
       <column caption='Motivo (Fato Parada Hora1)' datatype='string' name='[motivo (fato_parada_hora1)]' role='dimension' type='nominal' />
       <column caption='Motivo (Fato Parada Hora2)' datatype='string' name='[motivo (fato_parada_hora2)]' role='dimension' type='nominal' />
@@ -3321,11 +4001,14 @@
       <column caption='Nome' datatype='string' name='[nome]' role='dimension' type='nominal' />
       <column caption='Nome Dia Semana' datatype='string' name='[nome_dia_semana]' role='dimension' type='nominal' />
       <column caption='Nome Feriado' datatype='string' name='[nome_feriado]' role='dimension' type='nominal' />
+      <column caption='Nome Mes (Vw Pld Hora Mes)' datatype='string' name='[nome_mes (vw_pld_hora_mes)]' role='dimension' type='nominal' />
       <column caption='Nome Mes' datatype='string' name='[nome_mes]' role='dimension' type='nominal' />
       <column caption='Patamar Carga' datatype='string' name='[patamar_carga]' role='dimension' type='nominal' />
       <column caption='Percentual Falha (Fato Qualidade1)' datatype='real' name='[percentual_falha (fato_qualidade1)]' role='measure' type='quantitative' />
       <column caption='Percentual Falha' datatype='real' name='[percentual_falha]' role='measure' type='quantitative' />
       <column caption='Periodo Hidrologico' datatype='string' name='[periodo_hidrologico]' role='dimension' type='nominal' />
+      <column caption='Pld Medio' datatype='real' name='[pld_medio]' role='measure' type='quantitative' />
+      <column caption='Pld Medio Referencia' datatype='real' name='[pld_medio_referencia]' role='measure' type='quantitative' />
       <column caption='Pld Rs Mwh (Fato Geracao2)' datatype='real' name='[pld_rs_mwh (fato_geracao2)]' role='measure' type='quantitative' />
       <column caption='Pld Rs Mwh (Fato Geracao3)' datatype='real' name='[pld_rs_mwh (fato_geracao3)]' role='measure' type='quantitative' />
       <column caption='Pld Rs Mwh (Fato Geracao4)' datatype='real' name='[pld_rs_mwh (fato_geracao4)]' role='measure' type='quantitative' />
@@ -3340,9 +4023,11 @@
       <column caption='Precipitacao Mm (Fato Clima1)' datatype='real' name='[precipitacao_mm (fato_clima1)]' role='measure' type='quantitative' />
       <column caption='Precipitacao Mm (Fato Clima2)' datatype='real' name='[precipitacao_mm (fato_clima2)]' role='measure' type='quantitative' />
       <column caption='Precipitacao Mm (Fato Clima3)' datatype='real' name='[precipitacao_mm (fato_clima3)]' role='measure' type='quantitative' />
+      <column caption='Preco Capturado' datatype='real' name='[preco_capturado]' role='measure' type='quantitative' />
       <column caption='Radiacao Wm2 (Fato Clima1)' datatype='real' name='[radiacao_wm2 (fato_clima1)]' role='measure' type='quantitative' />
       <column caption='Radiacao Wm2 (Fato Clima2)' datatype='real' name='[radiacao_wm2 (fato_clima2)]' role='measure' type='quantitative' />
       <column caption='Radiacao Wm2 (Fato Clima3)' datatype='real' name='[radiacao_wm2 (fato_clima3)]' role='measure' type='quantitative' />
+      <column caption='Razao Captura' datatype='real' name='[razao_captura]' role='measure' type='quantitative' />
       <column caption='Receita Nao Gerada Rs (Fato Parada Hora1)' datatype='real' name='[receita_nao_gerada_rs (fato_parada_hora1)]' role='measure' type='quantitative' />
       <column caption='Receita Nao Gerada Rs (Fato Parada Hora2)' datatype='real' name='[receita_nao_gerada_rs (fato_parada_hora2)]' role='measure' type='quantitative' />
       <column caption='Receita Nao Gerada Rs (Fato Parada Hora3)' datatype='real' name='[receita_nao_gerada_rs (fato_parada_hora3)]' role='measure' type='quantitative' />
@@ -3351,6 +4036,9 @@
       <column caption='Receita Pld Rs (Fato Geracao3)' datatype='real' name='[receita_pld_rs (fato_geracao3)]' role='measure' type='quantitative' />
       <column caption='Receita Pld Rs (Fato Geracao4)' datatype='real' name='[receita_pld_rs (fato_geracao4)]' role='measure' type='quantitative' />
       <column caption='Receita Pld Rs (Fato Geracao5)' datatype='real' name='[receita_pld_rs (fato_geracao5)]' role='measure' type='quantitative' />
+      <column caption='Receita Rs' datatype='real' name='[receita_rs]' role='measure' type='quantitative' />
+      <column caption='Recorte (Fato Impacto Limpeza)' datatype='string' name='[recorte (fato_impacto_limpeza)]' role='dimension' type='nominal' />
+      <column caption='Recorte' datatype='string' name='[recorte]' role='dimension' type='nominal' />
       <column caption='Regioes' datatype='string' name='[regioes]' role='dimension' type='nominal' />
       <column caption='Registros Avaliados (Fato Qualidade1)' datatype='integer' name='[registros_avaliados (fato_qualidade1)]' role='measure' type='quantitative' />
       <column caption='Registros Avaliados' datatype='integer' name='[registros_avaliados]' role='measure' type='quantitative' />
@@ -3421,6 +4109,7 @@
       <column aggregation='Sum' caption='Sk Usina (Fato Parada Hora2)' datatype='integer' name='[sk_usina (fato_parada_hora2)]' role='dimension' type='ordinal' />
       <column aggregation='Sum' caption='Sk Usina (Fato Parada Hora3)' datatype='integer' name='[sk_usina (fato_parada_hora3)]' role='dimension' type='ordinal' />
       <column caption='Status' datatype='string' name='[status]' role='dimension' type='nominal' />
+      <column caption='Submercado (Vw Geracao Mensal)' datatype='string' name='[submercado (vw_geracao_mensal)]' role='dimension' type='nominal' />
       <column caption='Submercado' datatype='string' name='[submercado]' role='dimension' type='nominal' />
       <column caption='Tabela' datatype='string' name='[tabela]' role='dimension' type='nominal' />
       <column caption='Temperatura C (Fato Clima1)' datatype='real' name='[temperatura_c (fato_clima1)]' role='measure' type='quantitative' />
@@ -3429,8 +4118,15 @@
       <column caption='Tipo' datatype='string' name='[tipo]' role='dimension' type='nominal' />
       <column caption='Trimestre' datatype='integer' name='[trimestre]' role='dimension' type='quantitative' />
       <column caption='Uf' datatype='string' name='[uf]' role='dimension' type='nominal' />
+      <column caption='Usina' datatype='string' name='[usina]' role='dimension' type='nominal' />
       <column caption='Valido Ate' datatype='date' name='[valido_ate]' role='dimension' type='ordinal' />
       <column caption='Valido De' datatype='date' name='[valido_de]' role='dimension' type='ordinal' />
+      <column caption='Valor Antes (Fato Impacto Limpeza)' datatype='real' name='[valor_antes (fato_impacto_limpeza)]' role='measure' type='quantitative' />
+      <column caption='Valor Antes' datatype='real' name='[valor_antes]' role='measure' type='quantitative' />
+      <column caption='Valor Depois (Fato Impacto Limpeza)' datatype='real' name='[valor_depois (fato_impacto_limpeza)]' role='measure' type='quantitative' />
+      <column caption='Valor Depois' datatype='real' name='[valor_depois]' role='measure' type='quantitative' />
+      <column caption='Variacao Pct (Fato Impacto Limpeza)' datatype='real' name='[variacao_pct (fato_impacto_limpeza)]' role='measure' type='quantitative' />
+      <column caption='Variacao Pct' datatype='real' name='[variacao_pct]' role='measure' type='quantitative' />
       <column caption='Vento 100M Kmh (Fato Clima1)' datatype='real' name='[vento_100m_kmh (fato_clima1)]' role='measure' type='quantitative' />
       <column caption='Vento 100M Kmh (Fato Clima2)' datatype='real' name='[vento_100m_kmh (fato_clima2)]' role='measure' type='quantitative' />
       <column caption='Vento 100M Kmh (Fato Clima3)' datatype='real' name='[vento_100m_kmh (fato_clima3)]' role='measure' type='quantitative' />
@@ -3522,6 +4218,11 @@
               <relation connection='postgres.05ok52a1erbmrr15gcw4u0rl1tf3' name='fato_geracao5' table='[dw_campo_real].[fato_geracao]' type='table' />
             </properties>
           </object>
+          <object caption='fato_impacto_limpeza' id='fato_impacto_limpeza (dw_campo_real.fato_impacto_limpeza)_5A3D3E85CCAC47BC8868EA2062AD0899'>
+            <properties context=''>
+              <relation connection='postgres.05ok52a1erbmrr15gcw4u0rl1tf3' name='fato_impacto_limpeza' table='[dw_campo_real].[fato_impacto_limpeza]' type='table' />
+            </properties>
+          </object>
           <object caption='fato_parada_hora1' id='fato_parada_hora (dw_campo_real.fato_parada_hora)_0D1FDF8A202346BC886945907F01EED5'>
             <properties context=''>
               <relation connection='postgres.05ok52a1erbmrr15gcw4u0rl1tf3' name='fato_parada_hora1' table='[dw_campo_real].[fato_parada_hora]' type='table' />
@@ -3560,6 +4261,31 @@
           <object caption='fato_qualidade' id='fato_qualidade (dw_campo_real.fato_qualidade)_9C39ACC1C35B46739F8D11AC3378A26C'>
             <properties context=''>
               <relation connection='postgres.05ok52a1erbmrr15gcw4u0rl1tf3' name='fato_qualidade' table='[dw_campo_real].[fato_qualidade]' type='table' />
+            </properties>
+          </object>
+          <object caption='impacto_limpeza' id='impacto_limpeza (qualidade.impacto_limpeza)_DAE804DF93094BA6ACA6EB6769436E99'>
+            <properties context=''>
+              <relation connection='postgres.05ok52a1erbmrr15gcw4u0rl1tf3' name='impacto_limpeza' table='[qualidade].[impacto_limpeza]' type='table' />
+            </properties>
+          </object>
+          <object caption='vw_captura_por_fonte' id='vw_captura_por_fonte (dw_campo_real.vw_captura_por_fonte)_2DD9CF8B974A48A790F2630BEFB8DD52'>
+            <properties context=''>
+              <relation connection='postgres.05ok52a1erbmrr15gcw4u0rl1tf3' name='vw_captura_por_fonte' table='[dw_campo_real].[vw_captura_por_fonte]' type='table' />
+            </properties>
+          </object>
+          <object caption='vw_correlacao_clima' id='vw_correlacao_clima (dw_campo_real.vw_correlacao_clima)_39B3D68D32724AA4A2F802CE55042E9E'>
+            <properties context=''>
+              <relation connection='postgres.05ok52a1erbmrr15gcw4u0rl1tf3' name='vw_correlacao_clima' table='[dw_campo_real].[vw_correlacao_clima]' type='table' />
+            </properties>
+          </object>
+          <object caption='vw_geracao_mensal' id='vw_geracao_mensal (dw_campo_real.vw_geracao_mensal)_3266F593A881489BBEEDB8026149A846'>
+            <properties context=''>
+              <relation connection='postgres.05ok52a1erbmrr15gcw4u0rl1tf3' name='vw_geracao_mensal' table='[dw_campo_real].[vw_geracao_mensal]' type='table' />
+            </properties>
+          </object>
+          <object caption='vw_pld_hora_mes' id='vw_pld_hora_mes (dw_campo_real.vw_pld_hora_mes)_6F07E122054844569268234C3BB5B56A'>
+            <properties context=''>
+              <relation connection='postgres.05ok52a1erbmrr15gcw4u0rl1tf3' name='vw_pld_hora_mes' table='[dw_campo_real].[vw_pld_hora_mes]' type='table' />
             </properties>
           </object>
         </objects>
@@ -3744,8 +4470,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='700' minheight='700' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='8' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='7' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000' />
+            <zone h='100000' id='10' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='9' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000' />
               <zone-style>
                 <format attr='border-color' value='#444444' />
                 <format attr='border-style' value='none' />
