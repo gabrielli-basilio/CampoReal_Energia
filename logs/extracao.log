@@ -86,3 +86,14 @@
 2026-11-12 23:42:53,043 [INFO] CRE-UHE-001: 16320 horas gravadas
 2026-11-12 23:42:59,714 [INFO] CRE-UHE-008: 16320 horas gravadas
 2026-11-12 23:43:07,158 [INFO] CRE-UTE-009: 16320 horas gravadas
+2026-11-13 00:18:59,193 [WARNING] MODO SIMULAR FALHA: a CCEE sera acessada num endereco invalido
+2026-11-13 00:19:00,117 [WARNING] Tentativa 1/2 falhou: DNSError: Failed to perform, curl: (6) Could not resolve host: ccee.invalid (Domain name not found). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-11-13 00:19:01,131 [WARNING] Tentativa 2/2 falhou: DNSError: Failed to perform, curl: (6) Could not resolve host: ccee.invalid (Domain name not found). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-11-13 00:19:01,150 [ERROR] 2025: ERRO Falhou apos 2 tentativas: DNSError: Failed to perform, curl: (6) Could not resolve host: ccee.invalid (Domain name not found). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-11-13 00:19:01,285 [WARNING] Tentativa 1/2 falhou: DNSError: Failed to perform, curl: (6) Could not resolve host: ccee.invalid (Domain name not found). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-11-13 00:19:02,299 [WARNING] Tentativa 2/2 falhou: DNSError: Failed to perform, curl: (6) Could not resolve host: ccee.invalid (Domain name not found). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-11-13 00:19:02,316 [ERROR] 2026: ERRO Falhou apos 2 tentativas: DNSError: Failed to perform, curl: (6) Could not resolve host: ccee.invalid (Domain name not found). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-11-13 00:25:16,001 [INFO] 2025: API tem 35040 registros, raw ja tem 35040
+2026-11-13 00:25:16,002 [INFO] 2025: ja completo, nada a baixar
+2026-11-13 00:25:16,627 [INFO] 2026: API tem 30432 registros, raw ja tem 30432
+2026-11-13 00:25:16,627 [INFO] 2026: ja completo, nada a baixar
