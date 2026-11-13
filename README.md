@@ -86,3 +86,25 @@ Quando uma API externa está indisponível ou bloqueando requisições, o extrat
 ```bash
 python -m src.extracao.ccee --simular-falha
 ```
+
+---
+
+## 7. Data Warehouse (star schema)
+
+A carga cria e preenche o schema `dw_campo_real`, que é o único lido pelo Power BI.
+
+```bash
+python -m src.carga_dw
+```
+
+| Arquivo | Conteúdo |
+| :--- | :--- |
+| `sql/03_dw/01_ddl_dw.sql` | Dimensões, fatos e grão de cada fato |
+| `sql/04_carga_dw/01_dimensoes.sql` | Dimensão de tempo, dimensões de cadastro e `dim_usina` como SCD tipo 2 |
+| `sql/04_carga_dw/02_fatos.sql` | Fatos de geração (valorada ao PLD), PLD, clima e paradas |
+| `sql/04_carga_dw/03_qualidade.sql` | Fatos de qualidade (roda só quando o schema `qualidade` existe) |
+| `sql/03_dw/02_views.sql` | Views de apoio ao painel |
+| `docs/modelagem.md` | Matriz de barramento, grãos, diagrama, SCD e granularidades |
+
+Pré-requisito: extração e limpeza já executadas (a carga confere as tabelas e avisa o que falta).
+
