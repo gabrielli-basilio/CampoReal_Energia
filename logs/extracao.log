@@ -1,0 +1,57 @@
+2026-11-12 22:54:14,285 [WARNING] Tentativa 1/3 falhou: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 22:54:16,453 [WARNING] Tentativa 2/3 falhou: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 22:54:20,522 [WARNING] Tentativa 3/3 falhou: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 22:54:20,543 [ERROR] 2025: ERRO Falhou apos 3 tentativas: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 22:54:20,544 [ERROR] 2026: ERRO Falhou apos 3 tentativas: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 22:58:10,200 [WARNING] Tentativa 1/3 falhou: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 22:58:12,227 [WARNING] Tentativa 2/3 falhou: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 22:58:16,261 [WARNING] Tentativa 3/3 falhou: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 23:02:29,617 [WARNING] Tentativa 1/3 falhou: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 23:02:31,654 [WARNING] Tentativa 2/3 falhou: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 23:02:35,682 [WARNING] Tentativa 3/3 falhou: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 23:02:35,702 [ERROR] 2025: ERRO Falhou apos 3 tentativas: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 23:02:35,702 [ERROR] 2026: ERRO Falhou apos 3 tentativas: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 23:07:30,928 [WARNING] Tentativa 1/3 falhou: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 23:07:33,006 [WARNING] Tentativa 2/3 falhou: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 23:07:37,068 [WARNING] Tentativa 3/3 falhou: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 23:07:37,091 [ERROR] 2025: ERRO Falhou apos 3 tentativas: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 23:07:37,092 [ERROR] 2026: ERRO Falhou apos 3 tentativas: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 23:07:57,226 [WARNING] Tentativa 1/3 falhou: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 23:07:59,283 [WARNING] Tentativa 2/3 falhou: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 23:08:03,356 [WARNING] Tentativa 3/3 falhou: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 23:08:03,381 [ERROR] 2025: ERRO Falhou apos 3 tentativas: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 23:08:03,381 [ERROR] 2026: ERRO Falhou apos 3 tentativas: HTTPError: 403 Client Error: Forbidden for url: https://dadosabertos.ccee.org.br/api/3/action/package_show?id=pld_horario
+2026-11-12 23:09:59,187 [WARNING] Tentativa 1/3 falhou: RuntimeError: Erro HTTP/rede no curl: curl: (22) The requested URL returned error: 403
+2026-11-12 23:10:01,466 [WARNING] Tentativa 2/3 falhou: RuntimeError: Erro HTTP/rede no curl: curl: (22) The requested URL returned error: 403
+2026-11-12 23:10:05,745 [WARNING] Tentativa 3/3 falhou: RuntimeError: Erro HTTP/rede no curl: curl: (22) The requested URL returned error: 403
+2026-11-12 23:10:05,765 [ERROR] 2025: ERRO Falhou apos 3 tentativas: RuntimeError: Erro HTTP/rede no curl: curl: (22) The requested URL returned error: 403
+2026-11-12 23:10:05,765 [ERROR] 2026: ERRO Falhou apos 3 tentativas: RuntimeError: Erro HTTP/rede no curl: curl: (22) The requested URL returned error: 403
+2026-11-12 23:15:07,367 [WARNING] Tentativa 1/3 falhou: RuntimeError: Erro HTTP/rede no curl: curl: (22) The requested URL returned error: 403
+2026-11-12 23:15:09,648 [WARNING] Tentativa 2/3 falhou: RuntimeError: Erro HTTP/rede no curl: curl: (22) The requested URL returned error: 403
+2026-11-12 23:15:13,961 [WARNING] Tentativa 3/3 falhou: RuntimeError: Erro HTTP/rede no curl: curl: (22) The requested URL returned error: 403
+2026-11-12 23:15:13,980 [ERROR] 2025: ERRO Falhou apos 3 tentativas: RuntimeError: Erro HTTP/rede no curl: curl: (22) The requested URL returned error: 403
+2026-11-12 23:15:14,403 [WARNING] Tentativa 1/3 falhou: RuntimeError: Erro HTTP/rede no curl: curl: (22) The requested URL returned error: 403
+2026-11-12 23:15:16,694 [WARNING] Tentativa 2/3 falhou: RuntimeError: Erro HTTP/rede no curl: curl: (22) The requested URL returned error: 403
+2026-11-12 23:15:20,973 [WARNING] Tentativa 3/3 falhou: RuntimeError: Erro HTTP/rede no curl: curl: (22) The requested URL returned error: 403
+2026-11-12 23:15:20,993 [ERROR] 2026: ERRO Falhou apos 3 tentativas: RuntimeError: Erro HTTP/rede no curl: curl: (22) The requested URL returned error: 403
+2026-11-12 23:19:59,410 [INFO] 2025: lendo arquivo local dados\pld_horario_2025.csv
+2026-11-12 23:19:59,521 [INFO] 2025: CSV tem 35040 registros, raw ja tem 0
+2026-11-12 23:20:00,558 [INFO] 2025: gravados 5000 de 35040
+2026-11-12 23:20:01,609 [INFO] 2025: gravados 10000 de 35040
+2026-11-12 23:20:02,657 [INFO] 2025: gravados 15000 de 35040
+2026-11-12 23:20:03,707 [INFO] 2025: gravados 20000 de 35040
+2026-11-12 23:20:04,738 [INFO] 2025: gravados 25000 de 35040
+2026-11-12 23:20:05,784 [INFO] 2025: gravados 30000 de 35040
+2026-11-12 23:20:06,834 [INFO] 2025: gravados 35000 de 35040
+2026-11-12 23:20:06,888 [INFO] 2025: gravados 35040 de 35040
+2026-11-12 23:20:08,189 [INFO] 2025: staging.pld_horario atualizado (35040 linhas no ano)
+2026-11-12 23:20:08,343 [INFO] 2026: lendo arquivo local dados\pld_horario_2026.csv
+2026-11-12 23:20:08,433 [INFO] 2026: CSV tem 30432 registros, raw ja tem 0
+2026-11-12 23:20:09,525 [INFO] 2026: gravados 5000 de 30432
+2026-11-12 23:20:10,568 [INFO] 2026: gravados 10000 de 30432
+2026-11-12 23:20:11,617 [INFO] 2026: gravados 15000 de 30432
+2026-11-12 23:20:12,651 [INFO] 2026: gravados 20000 de 30432
+2026-11-12 23:20:13,700 [INFO] 2026: gravados 25000 de 30432
+2026-11-12 23:20:14,781 [INFO] 2026: gravados 30000 de 30432
+2026-11-12 23:20:14,917 [INFO] 2026: gravados 30432 de 30432
+2026-11-12 23:20:15,973 [INFO] 2026: staging.pld_horario atualizado (30432 linhas no ano)

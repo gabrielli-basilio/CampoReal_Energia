@@ -1,34 +1,80 @@
-"""Requisicao HTTP com nova tentativa, tempo limite e tratamento de limite de requisicoes."""
+"""Utilitarios de requisicao HTTP com retentativas sem dependencias externas."""
 
+import json
+import subprocess
 import time
-
-import requests
+from urllib.parse import urlencode, urlparse
 
 
 class ErroExtracao(Exception):
-    """Erro de extracao (fonte fora do ar, resposta vazia, colunas mudaram...)."""
+    """Erro levantado quando a extracao falha apos todas as tentativas ou recebe dados invalidos."""
 
 
-def pegar_json(url, params, timeout=60, tentativas=3, espera=2, logger=None):
+USER_AGENT = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) "
+    "Chrome/131.0.0.0 Safari/537.36"
+)
+
+
+def _montar_url(url, params):
+    if not params:
+        return url
+    separador = "&" if "?" in url else "?"
+    return f"{url}{separador}{urlencode(params)}"
+
+
+def pegar_json(url, params=None, timeout=60, tentativas=3, espera_segundos=2, logger=None):
+    """Faz uma requisicao GET esperando JSON via curl nativo do Windows."""
+    url_completa = _montar_url(url, params)
+    parsed = urlparse(url)
+    referer = f"{parsed.scheme}://{parsed.netloc}/"
     ultimo_erro = None
-    for n in range(1, tentativas + 1):
+
+    comando = [
+        "curl.exe",
+        "-sS",
+        "-L",
+        "-f",
+        "--max-time",
+        str(timeout),
+        "-H",
+        f"User-Agent: {USER_AGENT}",
+        "-H",
+        "Accept: application/json, text/plain, */*",
+        "-H",
+        "Accept-Language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+        "-H",
+        f"Referer: {referer}",
+        url_completa,
+    ]
+
+    for tentativa in range(1, tentativas + 1):
         try:
-            r = requests.get(url, params=params, timeout=timeout)
-            if r.status_code == 429:  # limite de requisicoes
-                pausa = int(r.headers.get("Retry-After", espera * n * 5))
-                if logger:
-                    logger.warning("Limite de requisicoes (429). Aguardando %ss", pausa)
-                time.sleep(pausa)
-                ultimo_erro = "HTTP 429 (limite de requisicoes)"
-                continue
-            r.raise_for_status()
-            return r.json()
-        except (requests.Timeout, requests.ConnectionError) as e:
-            ultimo_erro = f"{type(e).__name__}: {e}"
-        except (requests.HTTPError, ValueError) as e:
-            ultimo_erro = f"{type(e).__name__}: {e}"
-        if logger:
-            logger.warning("Tentativa %s/%s falhou: %s", n, tentativas, ultimo_erro)
-        if n < tentativas:
-            time.sleep(espera * n)  # espera cresce a cada tentativa
-    raise ErroExtracao(f"Falhou apos {tentativas} tentativas: {ultimo_erro}")
+            proc = subprocess.run(
+                comando,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                check=False,
+            )
+            if proc.returncode != 0:
+                detalhe = proc.stderr.strip() or f"codigo de saida {proc.returncode}"
+                raise RuntimeError(f"Erro HTTP/rede no curl: {detalhe}")
+            return json.loads(proc.stdout)
+        except Exception as e:
+            ultimo_erro = e
+            if logger:
+                logger.warning(
+                    "Tentativa %s/%s falhou: %s: %s",
+                    tentativa,
+                    tentativas,
+                    type(e).__name__,
+                    e,
+                )
+            if tentativa < tentativas:
+                time.sleep(espera_segundos * (2 ** (tentativa - 1)))
+
+    raise ErroExtracao(
+        f"Falhou apos {tentativas} tentativas: {type(ultimo_erro).__name__}: {ultimo_erro}"
+    )
