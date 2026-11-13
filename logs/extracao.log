@@ -74,3 +74,15 @@
 2026-11-12 23:34:30,002 [INFO] 2026: baixados 30000 de 30432
 2026-11-12 23:34:30,495 [INFO] 2026: baixados 30432 de 30432
 2026-11-12 23:34:31,769 [INFO] 2026: staging.pld_horario atualizado (30432 linhas no ano)
+2026-11-12 23:41:56,176 [WARNING] staging.usina indisponivel: lendo a origem com ajuste minimo de cadastro
+2026-11-12 23:41:56,177 [WARNING] Usina CRE-EOL-07 ignorada (codigo fora do padrao ou fora do Brasil)
+2026-11-12 23:41:56,177 [INFO] 9 usinas para baixar o clima
+2026-11-12 23:42:08,421 [INFO] CRE-BIO-005: 16320 horas gravadas
+2026-11-12 23:42:16,523 [INFO] CRE-EOL-003: 16320 horas gravadas
+2026-11-12 23:42:21,949 [INFO] CRE-EOL-007: 16320 horas gravadas
+2026-11-12 23:42:30,953 [INFO] CRE-PCH-002: 16320 horas gravadas
+2026-11-12 23:42:38,900 [INFO] CRE-UFV-004: 16320 horas gravadas
+2026-11-12 23:42:46,574 [INFO] CRE-UFV-006: 16320 horas gravadas
+2026-11-12 23:42:53,043 [INFO] CRE-UHE-001: 16320 horas gravadas
+2026-11-12 23:42:59,714 [INFO] CRE-UHE-008: 16320 horas gravadas
+2026-11-12 23:43:07,158 [INFO] CRE-UTE-009: 16320 horas gravadas
