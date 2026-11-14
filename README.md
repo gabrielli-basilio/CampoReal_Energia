@@ -38,12 +38,20 @@ copy .env.example .env
 copy config\config.example.yaml config\config.yaml
 ```
 
+No Linux ou mac, troca as linhas de ativação e de cópia por:
+
+```
+source .venv/bin/activate
+cp .env.example .env
+cp config/config.example.yaml config/config.yaml
+```
+
 ### Variáveis e Parâmetros Locais
 Os arquivos `.env` e `config/config.yaml` estão listados no `.gitignore` e não são enviados ao repositório. Preencha-os antes de rodar os scripts:
 
 | Arquivo | O que configurar | Valores de Referência |
 | :--- | :--- | :--- |
-| **`.env`** | Credenciais de conexão com o banco Neon | `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` e `DB_SSLMODE=require` |
+| **`.env`** | Credenciais de conexão com o banco Neon | `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` e `DB_SSLMODE=require` |
 | **`config/config.yaml`** | Limites regulatórios do PLD (ANEEL) e IDs dos recursos CKAN | **2025:** piso `58.60` / teto `1542.23`<br>**2026:** piso `57.31` / teto `1611.04` |
 
 ---
@@ -56,7 +64,9 @@ Os arquivos `.env` e `config/config.yaml` estão listados no `.gitignore` e não
 | **2** | **Extração CCEE** | `python -m src.extracao.ccee` | Carga do PLD horário de 2025 e 2026 nas camadas `raw` e `staging` |
 | **3** | **Pipeline Completo** | `python -m src.pipeline` | Executa CCEE, limpeza (`src.qualidade.executar --etapas limpeza`), clima e carga do DW |
 | **4** | **Testes Unitários** | `python -m pytest -q` | Todos os testes de regras, paginação e falhas aprovados (`6 passed`) |
-| **5** | **Avaliação de Qualidade** | `python -m src.qualidade.executar` | Ciclo completo: avalia a origem (com profiling), limpa, reavalia a staging e gera o impacto. As regras de clima só são avaliadas se rodar **depois** do passo 3 |
+| **5** | **Avaliação de Qualidade** | `python -m src.qualidade.executar` | Ciclo completo: avalia a origem (com profiling), limpa, reavalia a staging e gera o impacto. As regras de clima só são avaliadas se rodar **depois** do passo 3 | 
+
+A qualidade (`python -m src.qualidade.executar`) roda antes da carga do DW: o `src.pipeline` já executa a limpeza antes de carregar o `dw_campo_real`.
 
 ---
 

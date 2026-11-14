@@ -37,7 +37,7 @@ Banco: PostgreSQL. Schema do warehouse: `dw_campo_real`. DDL em `sql/03_dw/01_dd
 
 Medidas derivadas e por que estão no fato:
 
-- `receita_pld_rs = energia_mwh × PLD da mesma hora no submercado da usina`. É aditiva e responde à pergunta 2 sem obrigar o Power BI a relacionar duas tabelas por chave composta (hora + submercado). `pld_rs_mwh` fica ao lado como contexto da linha.
+- `receita_pld_rs = energia_mwh × PLD da mesma hora no submercado da usina`. É aditiva e responde à pergunta 2 sem obrigar o Tableau a relacionar duas tabelas por chave composta (hora + submercado). `pld_rs_mwh` fica ao lado como contexto da linha.
 - `potencia_mw` repetida em cada hora permite somar a energia possível no período e calcular o fator de capacidade com a potência vigente naquela versão da usina.
 - `energia_nao_gerada_mwh` em `fato_parada_hora` é a média gerada pela própria usina no mesmo mês e na mesma hora do dia, fora de paradas e sem valores anulados. É uma estimativa e está documentada como tal no painel.
 
@@ -201,7 +201,7 @@ flowchart LR
     S --> Q[qualidade.*]
     S --> DW[(dw_campo_real)]
     Q --> DW
-    DW --> P[Power BI]
+    DW --> P[Tableau]
 ```
 
 ## 10. Contrato com as outras etapas
