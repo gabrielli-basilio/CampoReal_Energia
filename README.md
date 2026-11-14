@@ -63,7 +63,7 @@ Os arquivos `.env` e `config/config.yaml` estão listados no `.gitignore` e não
 | **1** | **Carga de Origem** | Executar `sql/00_origem/campo_real_energia_postgres.sql` no DBeaver ou pgAdmin | 10 usinas e 78.798 medições carregadas no schema de origem |
 | **2** | **Extração CCEE** | `python -m src.extracao.ccee` | Carga do PLD horário de 2025 e 2026 nas camadas `raw` e `staging` |
 | **3** | **Pipeline Completo** | `python -m src.pipeline` | Executa CCEE, limpeza (`src.qualidade.executar --etapas limpeza`), clima e carga do DW |
-| **4** | **Testes Unitários** | `python -m pytest -q` | Todos os testes de regras, paginação e falhas aprovados (`6 passed`) |
+| **4** | **Testes Unitários** | `python -m pytest -q` | Todos os testes de regras, paginação e falhas aprovados (`11 passed`) |
 | **5** | **Avaliação de Qualidade** | `python -m src.qualidade.executar` | Ciclo completo: avalia a origem (com profiling), limpa, reavalia a staging e gera o impacto. As regras de clima só são avaliadas se rodar **depois** do passo 3 | 
 
 A qualidade (`python -m src.qualidade.executar`) roda antes da carga do DW: o `src.pipeline` já executa a limpeza antes de carregar o `dw_campo_real`.
